@@ -5,6 +5,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import TrendingPage from "./pages/TrendingPage";
 import UserPage from "./pages/UserPage";
+import HashtagPage from "./pages/HashtagPage";
 
 export default function App() {
   return (
