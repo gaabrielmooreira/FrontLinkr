@@ -9,7 +9,7 @@ export default function TrendingCard() {
 
     useEffect(() => {
         try {
-            const dados = apiTrending.getTrendings('eb8cabb1-5a8e-4794-99e9-277278bf1634')
+            const dados = apiTrending.getTrendings('eb8cabb1-5a8e-4794-99e9-277278bf1634') // trocar depois o token pra ser do context ou localstorage
             dados.then(res => setHashtags(res))
         } catch (error) {
             console.log(error.message)
