@@ -85,11 +85,11 @@ export const LogoutContainer = styled.div`
     top: 72px;
     width: 133px;
     height: 47px;
-    display: ${props => props.showLogout ? "block" : "none"};
+    display: ${props => props.showLogout ? "flex" : "none"};
     padding: 9px 39px 18px 37px;
     border-radius: 0px 0px 0px 20px;
     background-color: #151515;
-    button{
+    p{
         cursor: pointer;
         color: #FFFFFF;
         font-family: 'Lato', sans-serif;
