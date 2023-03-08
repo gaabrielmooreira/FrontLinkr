@@ -1,9 +1,8 @@
-import Header from "../components/Header/Header";
+import PostsMainSection from "../components/PostsMainSection/PostsMainSection";
 
 export default function HomePage(){
     return(
-        <>
-            <Header/>
-        </>
+        <PostsMainSection title={'timeline'}>
+        </PostsMainSection>
     )
 }
