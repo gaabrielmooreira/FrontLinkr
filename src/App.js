@@ -18,7 +18,7 @@ export default function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/trending" element={<TrendingPage />} />
-        <Route path="/trending/hashtag/:idHashtag" element={<HashtagPage/>}/>
+        <Route path="/trending/hashtag/:hashtag" element={<HashtagPage/>}/>
         <Route path="/user/:idUser" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
