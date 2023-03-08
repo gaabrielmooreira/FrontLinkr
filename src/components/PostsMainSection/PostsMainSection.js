@@ -4,7 +4,7 @@ import Header from "../Header/Header.js";
 import TrendingCard from "../TrendingsSection/TrendingsSection.js";
 import { BLACK } from "../../constants/COLORS.js";
 
-export default function PostsMainSection({title}){
+export default function PostsMainSection({ title, posts }) {
     return (
         <BaseScreen>
             <Header></Header>
@@ -12,10 +12,18 @@ export default function PostsMainSection({title}){
                 <h1> {title}</h1>
                 <Section>
                     <ul>
-                        <Post></Post>
-                        <Post></Post>
-                        <Post></Post>
-                        <Post></Post>
+                        {!posts || posts==="carregando"? <Post>Carregando . . .</Post> :
+                        posts.map((el, i) =>
+                            <Post key={i}>
+                                <p>{el.description}</p>
+                                <p>{el.like_count}</p>
+                                <p>{el.liked_by.join(", ")}</p>
+                                <p>{el.link}</p>
+                                <p>{el.url}</p>
+                                <p>{el.user_liked? "curtiu": "não curtiu"}</p>
+                                <p>{el.user_name}</p>
+                            </Post>)
+                        }
 
                     </ul>
                     <TrendingCard></TrendingCard>
@@ -46,5 +54,7 @@ const Post = styled.li`
     margin-bottom: 29px;
     min-height:276px;
     border-radius:16px;
+    padding:20px;
     background-color: ${BLACK}
+    
 `
