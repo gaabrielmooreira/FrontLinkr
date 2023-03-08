@@ -17,8 +17,8 @@ export default function Header(props) {
     }
 
     const logout = () => {
-        closeMenu();
         navigate('/sign-in');
+        closeMenu();
     }
 
     return (
@@ -38,7 +38,7 @@ export default function Header(props) {
             </PerfilContainer>
 
             <LogoutContainer showLogout={showLogout}>
-                <button onClick={logout}>Logout</button>
+                <p onClick={logout}>Logout</p>
             </LogoutContainer>
         </HeaderContainer>
     )
