@@ -6,9 +6,11 @@ import SignUpPage from "./pages/SignUpPage";
 import TrendingPage from "./pages/TrendingPage";
 import UserPage from "./pages/UserPage";
 import HashtagPage from "./pages/HashtagPage";
+import AuthProvider from "./context/auth";
 
 export default function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -20,5 +22,6 @@ export default function App() {
         <Route path="/user/:idUser" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   )
 }
