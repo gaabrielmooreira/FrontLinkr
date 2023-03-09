@@ -2,9 +2,10 @@ import styled from "styled-components";
 import BaseScreen from "../BaseScreen/BaseScreen.js";
 import Header from "../Header/Header.js";
 import TrendingCard from "../TrendingsSection/TrendingsSection.js";
-import { BLACK } from "../../constants/COLORS.js";
+import { Post } from "../PostCard/Styled.js";
+import PostCard from "../PostCard/PostCard.js";
 
-export default function PostsMainSection({ title, posts }) {
+export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged }) {
     return (
         <BaseScreen>
             <Header></Header>
@@ -13,16 +14,9 @@ export default function PostsMainSection({ title, posts }) {
                 <Section>
                     <ul>
                         {!posts || posts==="carregando"? <Post>Carregando . . .</Post> :
-                        posts.map((el, i) =>
-                            <Post key={i}>
-                                <p>{el.description}</p>
-                                <p>{el.like_count}</p>
-                                <p>{el.liked_by.join(", ")}</p>
-                                <p>{el.link}</p>
-                                <p>{el.url}</p>
-                                <p>{el.user_liked? "curtiu": "não curtiu"}</p>
-                                <p>{el.user_name}</p>
-                            </Post>)
+                        posts.map((el) =>
+                            <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                            </PostCard>)
                         }
 
                     </ul>
@@ -48,13 +42,4 @@ const Section = styled.div`
     margin-top:43px;
     display:flex;
     gap:25px;
-`
-const Post = styled.li`
-    width:611px;
-    margin-bottom: 29px;
-    min-height:276px;
-    border-radius:16px;
-    padding:20px;
-    background-color: ${BLACK}
-    
 `

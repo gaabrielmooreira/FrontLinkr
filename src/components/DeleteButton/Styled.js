@@ -3,10 +3,13 @@ import { AiFillDelete } from 'react-icons/ai'
 
 export const DeleteIcon = styled(AiFillDelete)`
     color: #FFF;
+    font-size: 20px;
+    margin-left: 10px;
     &:hover{
         cursor: pointer;
     }
 `
+
 export const ModalContainer = styled.div`
     display: flex;
     position: fixed;
