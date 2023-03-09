@@ -5,6 +5,8 @@ import DeleteButton from "../DeleteButton/DeleteButton";
 import { EditIcon, Heart, HeartTransparent, LeftContainer, Post, RightContainer, RightTopContainer } from "./Styled";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
+import { useNavigate } from "react-router-dom";
+import { ReactTagify } from "react-tagify";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) {
     const { id, post_author_id, post_author, photo_author, post_description, post_link, liked_by, user_liked, likes_count } = post;
@@ -13,13 +15,14 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
     const [isLiked, setIsLiked] = useState(user_liked);
     const [likesPost, setLikesPost] = useState(likes_count);
     const [likesDescription, setLikesDescription] = useState("");
-    
+
     const [description, setDescription] = useState(post_description);
     const [isEditing, setIsEditing] = useState(false);
     const [isConfirmingEdit, setIsConfirmingEdit] = useState(false);
     const [descriptionInput, setDescriptionInput] = useState(description);
     const inputRef = useRef(null);
 
+    const navigate = useNavigate();
 
     // Like 
     const handleLike = async () => {
@@ -38,8 +41,9 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
         }
 
     }
+
     useEffect(() => {
-        function toolTipDescription(){
+        function toolTipDescription() {
             if (!likesPost) return setLikesDescription("Não existem curtidas ainda!");
             if (!isLiked) {
                 if (liked_by && liked_by.length === 1) return setLikesDescription(`${liked_by[0]}`);
@@ -52,10 +56,8 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
             }
         }
         toolTipDescription();
-    },[isLiked]);
+    }, [isLiked]);
 
-
-    
     // Edit 
     useEffect(() => {
         if (isEditing) inputRef.current.focus();
@@ -108,16 +110,21 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     </div>
                 </RightTopContainer>
                 {isEditing ?
-                    <input 
-                        ref={inputRef} 
-                        onKeyDown={handleKeyDown} 
-                        onChange={(e) => setDescriptionInput(e.target.value)} 
-                        value={descriptionInput} 
-                        type="text" 
+                    <input
+                        ref={inputRef}
+                        onKeyDown={handleKeyDown}
+                        onChange={(e) => setDescriptionInput(e.target.value)}
+                        value={descriptionInput}
+                        type="text"
                         disabled={isConfirmingEdit}
                     />
                     :
-                    <p>{description}</p>
+                    <ReactTagify colors={"white"}
+                        tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
+
+                        <p>{description}</p>
+
+                    </ReactTagify>
                 }
                 <a>{post_link}</a>
             </RightContainer>

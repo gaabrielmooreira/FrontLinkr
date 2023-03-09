@@ -13,18 +13,34 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                 <h1> {title}</h1>
                 <Section>
                     <ul>
-                        {!posts || posts==="carregando"? <Post>Carregando . . .</Post> :
-                        posts.map((el) =>
-                            <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
-                            </PostCard>)
+                        {!posts || posts === "carregando" ? <Post>Carregando . . .</Post> :
+                            posts.map((el) =>
+                                <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                                </PostCard>)
+                        // {!posts || posts === "carregando" ? <Post>Carregando . . .</Post> :
+                        //     posts.map((el, i) =>
+                        //         <Post key={i}>
+                        // <ReactTagify colors={"white"}
+                        //     tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
+
+                        //     <p>{el.post_description}</p>
+
+                        //              </ReactTagify>
+                        //             <p>{el.like_count}</p>
+                        //             <p>{el.liked_by?.join(", ")}</p>
+                        //             <p>{el.post_link}</p>
+                        //             <p>{el.photo_author}</p>
+                        //             <p>{el.user_liked ? "curtiu" : "não curtiu"}</p>
+                        //             <p>{el.post_author}</p>
+                        //         </Post>)
+                        //}
                         }
-
                     </ul>
-                    <TrendingCard></TrendingCard>
-                </Section>
+                <TrendingCard></TrendingCard>
+            </Section>
 
-            </Main>
-        </BaseScreen>
+        </Main>
+        </BaseScreen >
     )
 }
 
