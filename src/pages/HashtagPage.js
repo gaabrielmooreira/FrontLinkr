@@ -15,7 +15,7 @@ export default function HashtagPage() {
         } catch (error) {
             console.log(error.message)
         }
-    }, [hashtag])
+    }, [hashtag,userAuth.token])
     return (
         <PostsMainSection title={'# ' + hashtag} posts={!posts? 'carregando' : posts}/>
     )

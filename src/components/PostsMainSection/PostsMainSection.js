@@ -3,8 +3,12 @@ import BaseScreen from "../BaseScreen/BaseScreen.js";
 import Header from "../Header/Header.js";
 import TrendingCard from "../TrendingsSection/TrendingsSection.js";
 import { BLACK } from "../../constants/COLORS.js";
+import { ReactTagify } from "react-tagify";
+import { useNavigate } from "react-router-dom";
+
 
 export default function PostsMainSection({ title, posts }) {
+    const navigate = useNavigate()
     return (
         <BaseScreen>
             <Header></Header>
@@ -12,17 +16,22 @@ export default function PostsMainSection({ title, posts }) {
                 <h1> {title}</h1>
                 <Section>
                     <ul>
-                        {!posts || posts==="carregando"? <Post>Carregando . . .</Post> :
-                        posts.map((el, i) =>
-                            <Post key={i}>
-                                <p>{el.post_description}</p>
-                                <p>{el.like_count}</p>
-                                <p>{el.liked_by?.join(", ")}</p>
-                                <p>{el.post_link}</p>
-                                <p>{el.photo_author}</p>
-                                <p>{el.user_liked? "curtiu": "não curtiu"}</p>
-                                <p>{el.post_author}</p>
-                            </Post>)
+                        {!posts || posts === "carregando" ? <Post>Carregando . . .</Post> :
+                            posts.map((el, i) =>
+                                <Post key={i}>
+                                    <ReactTagify colors={"white"}
+                                        tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
+
+                                        <p>{el.post_description}</p>
+
+                                    </ReactTagify>
+                                    <p>{el.like_count}</p>
+                                    <p>{el.liked_by?.join(", ")}</p>
+                                    <p>{el.post_link}</p>
+                                    <p>{el.photo_author}</p>
+                                    <p>{el.user_liked ? "curtiu" : "não curtiu"}</p>
+                                    <p>{el.post_author}</p>
+                                </Post>)
                         }
 
                     </ul>
