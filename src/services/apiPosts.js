@@ -24,11 +24,17 @@ async function deletePost(idPost, token){
     return await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/posts/${idPost}`, createConfig(token));
 }
 
+async function getPostsByUser(idUser, token){
+    const {data: res} = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/user/${idUser}`,createConfig(token)) 
+    return res
+}
+
 const apiPosts = {
     getPostsByHashtag,
     deletePost,
     updatePost,
     getPosts,
     toggleLike,
+    getPostsByUser
 }
 export default apiPosts;
