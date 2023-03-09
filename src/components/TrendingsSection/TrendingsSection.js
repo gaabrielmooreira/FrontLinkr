@@ -1,27 +1,31 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { BLACK, WHITE } from "../../constants/COLORS"
+import { AuthContext } from "../../context/auth"
 import apiTrending from "../../services/apiTrending"
 
 export default function TrendingCard() {
     const [hashtags, setHashtags] = useState(undefined)
+    const { userAuth } = useContext(AuthContext)
 
     useEffect(() => {
         try {
-            const dados = apiTrending.getTrendings('eb8cabb1-5a8e-4794-99e9-277278bf1634') // trocar depois o token pra ser do context ou localstorage
+            const dados = apiTrending.getTrendings(userAuth.token) // trocar depois o token pra ser do context ou localstorage
             dados.then(res => setHashtags(res))
         } catch (error) {
             console.log(error.message)
         }
-    }, [])
+    }, [userAuth.token])
     return (
         <Conteiner>
             <div>
                 <h1>trending</h1>
             </div>
-            {!hashtags ?
-                <ul>carregando ...</ul> :
+            {!hashtags || hashtags.length === 0 ?
+                <ul>
+                    {hashtags ? <li>Nothing trending today yet</li> : <li>Carregando ...</li> }
+                </ul> :
                 <ul>
                     {hashtags.map((el, i) =>
                         <HashtagItem key={i}>
