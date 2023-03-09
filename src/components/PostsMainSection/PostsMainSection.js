@@ -8,7 +8,7 @@ import PostCard from "../PostCard/PostCard.js";
 export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged }) {
     return (
         <BaseScreen>
-            <Header></Header>
+            <Header withSearch={true}></Header>
             <Main>
                 <h1> {title}</h1>
                 <Section>
