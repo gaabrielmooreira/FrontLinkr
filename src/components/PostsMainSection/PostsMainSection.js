@@ -15,13 +15,13 @@ export default function PostsMainSection({ title, posts }) {
                         {!posts || posts==="carregando"? <Post>Carregando . . .</Post> :
                         posts.map((el, i) =>
                             <Post key={i}>
-                                <p>{el.description}</p>
+                                <p>{el.post_description}</p>
                                 <p>{el.like_count}</p>
-                                <p>{el.liked_by.join(", ")}</p>
-                                <p>{el.link}</p>
-                                <p>{el.url}</p>
+                                <p>{el.liked_by?.join(", ")}</p>
+                                <p>{el.post_link}</p>
+                                <p>{el.photo_author}</p>
                                 <p>{el.user_liked? "curtiu": "não curtiu"}</p>
-                                <p>{el.user_name}</p>
+                                <p>{el.post_author}</p>
                             </Post>)
                         }
 

@@ -27,9 +27,9 @@ export default function SignInPage() {
     axios
       .post(`${process.env.REACT_APP_API_BASE_URL}/signin`, body)
       .then((res) => {
-        const { token, url, name } = res.data;
-        setUserAuth({ token, url, name });
-        localStorage.setItem("user", JSON.stringify({ token, url, name }));
+        const { token, url, name, id } = res.data;
+        setUserAuth({ token, url, name, id });
+        localStorage.setItem("user", JSON.stringify({ token, url, name, id }));
 
         navigate("/");
       })
