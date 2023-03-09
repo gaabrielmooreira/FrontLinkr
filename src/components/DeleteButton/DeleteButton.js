@@ -1,30 +1,25 @@
-import axios from "axios";
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { DeleteIcon, ModalBox, ModalContainer } from "./Styled";
 import { ColorRing } from 'react-loader-spinner'
+import apiPosts from "../../services/apiPosts";
+import { AuthContext } from "../../context/auth";
 
 
-export default function DeleteButton({ idPost, setPostsAreChanged }) {
+export default function DeleteButton({ idPost, postsAreChanged, setPostsAreChanged }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [deleteIsLoading, setDeleteIsLoading] = useState(false);
-    const token = 1;
+    const { userAuth } = useContext(AuthContext);
 
     const handleOpenModal = () => setModalIsOpen(true);
     const handleCloseModal = () => setModalIsOpen(false);
     const handleDeletePost = async () => {
         setDeleteIsLoading(true);
-        const URL = `${process.env.REACT_APP_API_BASE_URL}/posts/${idPost}`;
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        };
 
         try {
-            await axios.delete(URL, config);
+            await apiPosts.deletePost(idPost, userAuth.token)
             setDeleteIsLoading(false);
             setModalIsOpen(false);
-            setPostsAreChanged(true);
+            setPostsAreChanged(!postsAreChanged);
         } catch (error) {
             setDeleteIsLoading(false);
             setModalIsOpen(false);

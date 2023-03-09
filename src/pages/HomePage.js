@@ -1,8 +1,23 @@
 import PostsMainSection from "../components/PostsMainSection/PostsMainSection";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/auth.js";
+import apiPosts from "../services/apiPosts.js";
 
-export default function HomePage(){
-    return(
-        <PostsMainSection title={'timeline'}>
+export default function HomePage() {
+    const [posts, setPosts] = useState([]);
+    const [postsAreChanged, setPostsAreChanged] = useState(false);
+    const { userAuth } = useContext(AuthContext);
+
+    useEffect(() => {
+        async function getData() {
+            const data = await apiPosts.getPosts(userAuth.token);
+            setPosts(data);
+        }
+        getData();
+    }, [postsAreChanged])
+
+    return (
+        <PostsMainSection title={'timeline'} posts={posts} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
         </PostsMainSection>
     )
 }

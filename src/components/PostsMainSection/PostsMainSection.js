@@ -2,13 +2,10 @@ import styled from "styled-components";
 import BaseScreen from "../BaseScreen/BaseScreen.js";
 import Header from "../Header/Header.js";
 import TrendingCard from "../TrendingsSection/TrendingsSection.js";
-import { BLACK } from "../../constants/COLORS.js";
-import { ReactTagify } from "react-tagify";
-import { useNavigate } from "react-router-dom";
+import { Post } from "../PostCard/Styled.js";
+import PostCard from "../PostCard/PostCard.js";
 
-
-export default function PostsMainSection({ title, posts }) {
-    const navigate = useNavigate()
+export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged }) {
     return (
         <BaseScreen>
             <Header></Header>
@@ -17,29 +14,33 @@ export default function PostsMainSection({ title, posts }) {
                 <Section>
                     <ul>
                         {!posts || posts === "carregando" ? <Post>Carregando . . .</Post> :
-                            posts.map((el, i) =>
-                                <Post key={i}>
-                                    <ReactTagify colors={"white"}
-                                        tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
+                            posts.map((el) =>
+                                <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                                </PostCard>)
+                        // {!posts || posts === "carregando" ? <Post>Carregando . . .</Post> :
+                        //     posts.map((el, i) =>
+                        //         <Post key={i}>
+                        // <ReactTagify colors={"white"}
+                        //     tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
 
-                                        <p>{el.post_description}</p>
+                        //     <p>{el.post_description}</p>
 
-                                    </ReactTagify>
-                                    <p>{el.like_count}</p>
-                                    <p>{el.liked_by?.join(", ")}</p>
-                                    <p>{el.post_link}</p>
-                                    <p>{el.photo_author}</p>
-                                    <p>{el.user_liked ? "curtiu" : "não curtiu"}</p>
-                                    <p>{el.post_author}</p>
-                                </Post>)
+                        //              </ReactTagify>
+                        //             <p>{el.like_count}</p>
+                        //             <p>{el.liked_by?.join(", ")}</p>
+                        //             <p>{el.post_link}</p>
+                        //             <p>{el.photo_author}</p>
+                        //             <p>{el.user_liked ? "curtiu" : "não curtiu"}</p>
+                        //             <p>{el.post_author}</p>
+                        //         </Post>)
+                        //}
                         }
-
                     </ul>
-                    <TrendingCard></TrendingCard>
-                </Section>
+                <TrendingCard></TrendingCard>
+            </Section>
 
-            </Main>
-        </BaseScreen>
+        </Main>
+        </BaseScreen >
     )
 }
 
@@ -57,13 +58,4 @@ const Section = styled.div`
     margin-top:43px;
     display:flex;
     gap:25px;
-`
-const Post = styled.li`
-    width:611px;
-    margin-bottom: 29px;
-    min-height:276px;
-    border-radius:16px;
-    padding:20px;
-    background-color: ${BLACK}
-    
 `

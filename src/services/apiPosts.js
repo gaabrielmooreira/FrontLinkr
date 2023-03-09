@@ -12,14 +12,16 @@ async function getPosts(token){
 }
 
 async function toggleLike(idPost,token){
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/posts/${idPost}/like`, createConfig(token));
+    const body = {};
+    return await axios.post(`${process.env.REACT_APP_API_BASE_URL}/posts/${idPost}/like`, body, createConfig(token));
 }
-async function updatePost(idPost, token, body){
-    await axios.put(`${process.env.REACT_APP_API_BASE_URL}/posts/${idPost}`, body, createConfig(token));
+async function updatePost(idPost, postDescription, token){
+    const body = {postDescription};
+    return await axios.put(`${process.env.REACT_APP_API_BASE_URL}/posts/${idPost}`, body, createConfig(token));
 }
 
 async function deletePost(idPost, token){
-    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/posts/${idPost}`, createConfig(token));
+    return await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/posts/${idPost}`, createConfig(token));
 }
 
 const apiPosts = {
