@@ -10,18 +10,18 @@ import AuthProvider from "./context/auth";
 
 export default function App() {
   return (
-    <AuthProvider>
     <BrowserRouter>
+    <AuthProvider>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/feed" element={<FeedPage />} />
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/trending" element={<TrendingPage />} />
-        <Route path="/trending/hashtag/:hashtag" element={<HashtagPage/>}/>
-        <Route path="/user/:idUser" element={<UserPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/feed" element={<FeedPage />} />
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/trending" element={<TrendingPage />} />
+          <Route path="/trending/hashtag/:hashtag" element={<HashtagPage />} />
+          <Route path="/user/:idUser" element={<UserPage />} />
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
-    </AuthProvider>
-  )
+  );
 }
