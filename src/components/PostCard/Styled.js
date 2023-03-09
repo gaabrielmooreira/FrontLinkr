@@ -27,7 +27,7 @@ export const LeftContainer = styled.div`
     p{
         width: 50px;
         text-align: center;
-        margin-top: 4px;
+        margin-top: 7px;
         color: #FFFFFF;
         font-family: 'Lato', sans-serif;
         font-size: 11px;
@@ -55,6 +55,7 @@ export const RightContainer = styled.div`
     display: flex;
     flex-direction: column;
     h2{
+        text-transform: capitalize;
         color: #fff;
         font-family: 'Lato', sans-serif;
         font-weight: 400;
