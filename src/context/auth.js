@@ -11,9 +11,7 @@ export default function AuthProvider({children}){
     useEffect(()=>{
       if(localUser === null){
         navigate("/sign-in")
-      } else{
-        navigate("/")
-      }
+      } 
     },[])
 
     return (
