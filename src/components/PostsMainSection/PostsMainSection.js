@@ -11,7 +11,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
         <BaseScreen>
             <Header withSearch={true}></Header>
             <Main>
-                <h1 data-test="hashtag-title"> {title}</h1>
+                <h1 data-test="hashtag-title">{title}</h1>
                 <Section>
                     <ul>
                         {title === "timeline" && <InsertPost postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />}
