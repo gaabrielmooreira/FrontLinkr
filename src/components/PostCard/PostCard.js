@@ -96,15 +96,16 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
     }
 
     return (
-        <Post>
+        <Post data-test="post">
             <LeftContainer>
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
-                {isLiked ? <Heart onClick={handleLike} /> : <HeartTransparent onClick={handleLike} />}
-                <p data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription}>{likesPost > 1 ? `${likesPost} likes` : `${likesPost} like`}</p>
+                {isLiked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent onClick={handleLike} />}
+                <p data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} data-test="counter">{likesPost > 1 ? `${likesPost} likes` : `${likesPost} like`}</p>
                 <Tooltip
                     id="my-tooltip"
                     place="bottom"
                     style={{ backgroundColor: "rgba(255,255,255,0.9)", color: "#505050" }}
+                    data-test="tooltip"
                 />
             </LeftContainer>
             <RightContainer>
@@ -113,7 +114,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     {
                         (post_author_id == userAuth.id) &&
                         <div>
-                            <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' />
+                            <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' data-test="edit-btn"/>
                             <DeleteButton idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
                         </div>
                     }
@@ -126,6 +127,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                         value={descriptionInput}
                         type="text"
                         disabled={isConfirmingEdit}
+                        data-test="edit-input"
                     />
                     :
                     <ReactTagify colors={"white"}

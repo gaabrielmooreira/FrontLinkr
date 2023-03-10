@@ -18,7 +18,7 @@ export default function TrendingCard() {
         }
     }, [userAuth.token])
     return (
-        <Conteiner>
+        <Container data-test="trending">
             <div>
                 <h1>trending</h1>
             </div>
@@ -28,16 +28,16 @@ export default function TrendingCard() {
                 </ul> :
                 <ul>
                     {hashtags.map((el, i) =>
-                        <HashtagItem key={i}>
+                        <HashtagItem key={i} data-test="hashtag">
                             <Link to={`/trending/hashtag/${el.name}`}> {el.name}</Link>
                         </HashtagItem>)}
                 </ul>
             }
-        </Conteiner>
+        </Container>
     )
 }
 
-const Conteiner = styled.div`
+const Container = styled.div`
     max-height:406px;
     min-width: 301px;
     div:nth-child(1) {

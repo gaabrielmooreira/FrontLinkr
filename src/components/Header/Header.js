@@ -52,10 +52,12 @@ export default function Header(props) {
                         minLength={3}
                         debounceTimeout={300}
                         list="users"
-                        onChange={(e) => handleUserSearch(e.target.value)} />
+                        onChange={(e) => handleUserSearch(e.target.value)} 
+                        data-test="search"
+                    />
                     <ul items={usersQueryResult.length}>
                         {usersQueryResult.map((el)=>
-                        <li key={el.id} onClick={()=>navigate(`/user/${el.id}`)}>
+                        <li key={el.id} onClick={()=>navigate(`/user/${el.id}`)} data-test="user-search">
                             <img src={el.photo_user} alt={el.name}/>
                             <p>{el.name}</p>
                         </li>)}

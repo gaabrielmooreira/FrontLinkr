@@ -11,7 +11,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
         <BaseScreen>
             <Header withSearch={true}></Header>
             <Main>
-                <h1> {title}</h1>
+                <h1 data-test="hashtag-title"> {title}</h1>
                 <Section>
                     <ul>
                         {title === "timeline" && <InsertPost/>}
@@ -19,7 +19,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                             <Post>Loading</Post>
                             :
                             posts.length === 0 ? 
-                                <Post>There are no posts yet</Post>
+                                <Post data-test="message">There are no posts yet</Post>
                                 :
                                 posts.map((el) =>
                                     <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>

@@ -30,7 +30,7 @@ export default function DeleteButton({ idPost, postsAreChanged, setPostsAreChang
 
     return (
         <>
-            <DeleteIcon onClick={handleOpenModal} color="#FFF" />
+            <DeleteIcon onClick={handleOpenModal} color="#FFF" data-test="delete-btn"/>
             {modalIsOpen &&
                 <ModalContainer>
                     <ModalBox>
@@ -47,8 +47,8 @@ export default function DeleteButton({ idPost, postsAreChanged, setPostsAreChang
                             />
                             :
                             <div>
-                                <button onClick={handleCloseModal}>No, go back</button>
-                                <button onClick={handleDeletePost}>Yes, delete it</button>
+                                <button onClick={handleCloseModal} data-test="cancel">No, go back</button>
+                                <button onClick={handleDeletePost} data-test="confirm">Yes, delete it</button>
                             </div>
                         }
                     </ModalBox>
