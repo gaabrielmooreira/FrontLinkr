@@ -99,7 +99,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
         <Post data-test="post">
             <LeftContainer>
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
-                {isLiked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent onClick={handleLike} />}
+                {isLiked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent data-test="like-btn" onClick={handleLike} />}
                 <p data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} data-test="counter">{likesPost > 1 ? `${likesPost} likes` : `${likesPost} like`}</p>
                 <Tooltip
                     id="my-tooltip"
@@ -110,7 +110,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
             </LeftContainer>
             <RightContainer>
                 <RightTopContainer>
-                    <h2 onClick={goToUserPage}>{post_author}</h2>
+                    <h2 data-test="username" onClick={goToUserPage}>{post_author}</h2>
                     {
                         (post_author_id === userAuth.id) &&
                         <div>
@@ -133,7 +133,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     <ReactTagify colors={"white"}
                         tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
 
-                        <PostText>{description? description : ""}</PostText>
+                        <PostText data-test="description">{description? description : ""}</PostText>
 
                     </ReactTagify>
                 }
