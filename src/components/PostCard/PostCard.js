@@ -74,6 +74,10 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
         setIsEditing(false);
     }
 
+    function goToUserPage() {
+        return navigate(`/user/${post_author_id}`)
+    }
+
     const handleKeyDown = async (event) => {
         if (event.key === 'Enter') {
             setIsConfirmingEdit(true);
@@ -94,7 +98,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
     return (
         <Post>
             <LeftContainer>
-                <img src={photo_author} alt="foto-perfil" />
+                <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
                 {isLiked ? <Heart onClick={handleLike} /> : <HeartTransparent onClick={handleLike} />}
                 <p data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription}>{likesPost > 1 ? `${likesPost} likes` : `${likesPost} like`}</p>
                 <Tooltip
@@ -105,7 +109,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
             </LeftContainer>
             <RightContainer>
                 <RightTopContainer>
-                    <h2>{post_author}</h2>
+                    <h2 onClick={goToUserPage}>{post_author}</h2>
                     {
                         (post_author_id == userAuth.id) &&
                         <div>

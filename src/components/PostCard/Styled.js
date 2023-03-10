@@ -23,6 +23,9 @@ export const LeftContainer = styled.div`
         height: 50px;
         border-radius: 50%;
         margin-bottom: 19px;
+        &:hover{
+            cursor: pointer;
+        }
     }
     p{
         width: 50px;
@@ -61,6 +64,9 @@ export const RightContainer = styled.div`
         font-weight: 400;
         font-size: 19px;
         margin-bottom: 7px;
+        &:hover{
+            cursor: pointer;
+        }
     }
     p{
         font-size: 17px;
