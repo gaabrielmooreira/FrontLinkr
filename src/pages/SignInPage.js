@@ -31,7 +31,7 @@ export default function SignInPage() {
         setUserAuth({ token, url, name, id });
         localStorage.setItem("user", JSON.stringify({ token, url, name, id }));
 
-        navigate("/");
+        navigate("/timeline");
       })
       .catch((error) => {
         alert(error.response.data);
