@@ -15,7 +15,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
     const { userAuth } = useContext(AuthContext);
 
     const [isLiked, setIsLiked] = useState(user_liked);
-    const [likesPost, setLikesPost] = useState(likes_count);
+    const [likesPost, setLikesPost] = useState(Number(likes_count));
     const [likesDescription, setLikesDescription] = useState("");
 
     const [description, setDescription] = useState(post_description);
