@@ -40,7 +40,7 @@ export default function InsertPost() {
   }
 
   return (
-    <Container>
+    <Container data-test="publish-box">
       <LeftContainer>
         <img src={userAuth.url} alt="perfil-image" />
       </LeftContainer>
@@ -52,6 +52,7 @@ export default function InsertPost() {
           value={url}
           onChange={(e) => setPostInfo({ ...postInfo, url: e.target.value })}
           disabled={disabled}
+          data-test="link"
         />
         <InputDescription
           placeholder="Awesome article about..."
@@ -61,9 +62,10 @@ export default function InsertPost() {
             setPostInfo({ ...postInfo, description: e.target.value })
           }
           disabled={disabled}
+          data-test="description" 
         />
         <Button>
-          <button type="submit" disabled={disabled}>
+          <button type="submit" disabled={disabled} data-test="publish-btn" >
             Publish
           </button>
         </Button>

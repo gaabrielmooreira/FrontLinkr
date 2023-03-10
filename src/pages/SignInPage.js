@@ -55,6 +55,7 @@ export default function SignInPage() {
               onChange={(e) =>
                 setLoginInfo({ ...loginInfo, email: e.target.value })
               }
+              data-test="email"
             />
             <input
               placeholder="password"
@@ -63,12 +64,13 @@ export default function SignInPage() {
               onChange={(e) =>
                 setLoginInfo({ ...loginInfo, password: e.target.value })
               }
+              data-test="password"
             />
-            <button type="submit" disabled={disabled}>
+            <button type="submit" disabled={disabled} data-test="login-btn">
               Log In
             </button>
 
-            <Link to={"/sign-up"}>
+            <Link to={"/sign-up"} data-test="sign-up-link">
               <Login>First time? Create an account!</Login>
             </Link>
           </Form>
