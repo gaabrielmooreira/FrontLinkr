@@ -48,9 +48,9 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
         function toolTipDescription() {
             if (!likesPost) return setLikesDescription("");
             if (!isLiked) {
-                if (liked_by && liked_by.length === 1) return setLikesDescription(`${liked_by[0]}`);
-                if (liked_by && liked_by.length === 2) return setLikesDescription(`${liked_by[0]} e ${liked_by[1]}`);
-                if (liked_by && liked_by.length > 2) return setLikesDescription(`${liked_by[0]}, ${liked_by[1]} e outras ${likesPost - 2} pessoas`);
+                if (liked_by && likesPost === 1) return setLikesDescription(`${liked_by[0]}`);
+                if (liked_by && likesPost === 2) return setLikesDescription(`${liked_by[0]} e ${liked_by[1]}`);
+                if (liked_by && likesPost > 2) return setLikesDescription(`${liked_by[0]}, ${liked_by[1]} e outras ${likesPost - 2} pessoas`);
             } else {
                 if (liked_by === null) return setLikesDescription(`Você`);
                 if (liked_by.length === 1) return setLikesDescription(`Você e ${liked_by[0]}`);
