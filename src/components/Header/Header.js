@@ -14,6 +14,7 @@ export default function Header(props) {
     const [showLogout, setShowLogout] = useState(false);
     const { userAuth } = useContext(AuthContext)
     const navigate = useNavigate();
+    const [query,setQuery] = useState("")
     const [usersQueryResult, setUsersQueryResult] = useState([])
 
     const closeMenu = () => showLogout && setShowLogout(false);
@@ -32,6 +33,7 @@ export default function Header(props) {
 
     async function handleUserSearch(string) {
         if (!string) setUsersQueryResult([])
+        setQuery(string)
         try {
             const users = await apiUsers.getUsers(string, userAuth.token)
             setUsersQueryResult(users)
@@ -39,6 +41,11 @@ export default function Header(props) {
         } catch (error) {
             console.log(error)
         }
+    }
+    function handleClick(id){
+        setQuery("")
+        setUsersQueryResult([])
+        navigate(`/user/${id}`)
     }
 
     return (
@@ -54,10 +61,11 @@ export default function Header(props) {
                         list="users"
                         onChange={(e) => handleUserSearch(e.target.value)} 
                         data-test="search"
+                        value={query}
                     />
                     <ul items={usersQueryResult.length}>
                         {usersQueryResult.map((el)=>
-                        <li key={el.id} onClick={()=>navigate(`/user/${el.id}`)} data-test="user-search">
+                        <li key={el.id} onClick={()=>handleClick(el.id)} data-test="user-search">
                             <img src={el.photo_user} alt={el.name}/>
                             <p>{el.name}</p>
                         </li>)}
