@@ -45,42 +45,42 @@ export default function SignUpPage() {
         <RigthContainer>
           <Form onSubmit={OnSubmit}>
             <input
+              data-test="email"
               placeholder="e-mail"
               type="email"
               value={email}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, email: e.target.value })
               }
-              data-test="email"
             />
             <input
+              data-test="password"
               placeholder="password"
               type="password"
               value={password}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, password: e.target.value })
               }
-              data-test="password"
             />
             <input
+              data-test="username"
               placeholder="username"
               type="text"
               value={name}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, name: e.target.value })
               }
-              data-test="username"
             />
             <input
+              data-test="picture-url"
               placeholder="picture url"
               type="url"
               value={url}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, url: e.target.value })
               }
-              data-test="picture-url"
             />
-            <button type="submit" disabled={disabled} data-test="sign-up-btn">
+            <button data-test="sign-up-btn" type="submit" disabled={disabled} >
               Sign Up
             </button>
 
