@@ -137,7 +137,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
 
                     </ReactTagify>
                 }
-                <LinkContainer href={post_link} target="_blank">
+                <LinkContainer href={post_link} data-test="link" target="_blank">
                     <div>
                         <h2>{post_link_title}</h2>
                         <p>{post_link_description}</p>
