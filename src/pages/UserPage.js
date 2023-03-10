@@ -21,7 +21,7 @@ export default function UserPage(){
         } catch (error) {
             console.log(error.message)
         }
-    },[])
+    },[idUser])
 
     return(
         <PostsMainSection title={author} posts={!posts? 'carregando' : posts}/>
