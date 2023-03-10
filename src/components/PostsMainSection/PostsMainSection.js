@@ -9,7 +9,7 @@ import InsertPost from "../InsertPost/insertPost.js";
 export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged}) {
     return (
         <BaseScreen>
-            <Header />
+            <Header withSearch={true}></Header>
             <Main>
                 <h1> {title}</h1>
                 <Section>

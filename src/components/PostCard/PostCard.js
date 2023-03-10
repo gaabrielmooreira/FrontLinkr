@@ -127,7 +127,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     <ReactTagify colors={"white"}
                         tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
 
-                        <p>{description}</p>
+                        <p>{description? description : ""}</p>
 
                     </ReactTagify>
                 }

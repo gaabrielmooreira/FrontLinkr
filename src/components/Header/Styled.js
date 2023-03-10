@@ -8,6 +8,7 @@ export const HeaderContainer = styled.header`
     width: 100vw;
     height: 72px;
     display: flex;
+    overflow:visible;
     justify-content: space-between;
     align-items: center;
     background-color: #151515;
@@ -44,26 +45,79 @@ export const InputDiv = styled.div`
                 cursor: pointer;
             }
         }
+        input {
+            z-index:2;
+            width: 100%;
+            height: 48px;
+            background-color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 11px 12px 17px;
+            font-size: 19px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            &::placeholder{
+                color: #C6C6C6;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+
+        ul {
+            position:absolute;
+            z-index:1;
+            top:0px;
+            display:flex;
+            flex-direction:column;
+            border-radius:8px;
+            width: 100%;
+            height: max-content;
+            background-color: #E7E7E7;
+            padding-top:48px;
+            li {
+                display:flex;
+                gap:15px;
+                align-items:center;
+                padding:10px;
+                width:100%;
+                min-height: 50px;
+                font-family: 'Lato';
+                font-weight: 400;
+                font-size: 19px;
+                line-height: 23px;
+                color: #515151;
+                &:hover{
+                    cursor:pointer;
+                }
+            }
+            img {
+                    width:39px;
+                    height:39px;
+                    border-radius:50%;
+                }
+
+        }
     }
 `
 
-export const InputSearch = styled.input`
-    width: 100%;
-    height: 100%;
-    background-color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 11px 12px 17px;
-    font-size: 19px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    &::placeholder{
-        color: #C6C6C6;
-    }
-    &:focus {
-        outline: none;
-    }
-`
+// export const InputSearch = styled.input`
+//     width: 100%;
+//     height: 100%;
+//     background-color: #FFFFFF;
+//     border: none;
+//     border-radius: 8px;
+//     padding: 10px 11px 12px 17px;
+//     font-size: 19px;
+//     font-family: 'Lato', sans-serif;
+//     font-weight: 400;
+//     &::placeholder{
+//         color: #C6C6C6;
+//     }
+//     &:focus {
+//         outline: none;
+//     }
+// `
 export const PerfilContainer = styled.div`
     display: flex;
     align-items: center;
@@ -98,4 +152,8 @@ export const LogoutContainer = styled.div`
         border: none;
         background-color: #151515;
     }
+`
+
+export const userCardSearch = styled.ul`
+
 `
