@@ -5,7 +5,7 @@ import { BLACK, WHITE } from "../../constants/COLORS"
 import { AuthContext } from "../../context/auth"
 import apiTrending from "../../services/apiTrending"
 
-export default function TrendingCard() {
+export default function TrendingCard({postsAreChanged}) {
     const [hashtags, setHashtags] = useState(undefined)
     const { userAuth } = useContext(AuthContext)
 
@@ -16,7 +16,7 @@ export default function TrendingCard() {
         } catch (error) {
             console.log(error.message)
         }
-    }, [userAuth.token])
+    }, [userAuth.token,postsAreChanged])
     return (
         <Conteiner>
             <div>
