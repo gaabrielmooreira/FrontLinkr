@@ -29,12 +29,18 @@ async function getPostsByUser(idUser, token){
     return res
 }
 
+async function insertPost(description, link, token){
+    const body = {description, link}
+    return await axios.post(`${process.env.REACT_APP_API_BASE_URL}/create-post`, body, createConfig(token))
+}
+
 const apiPosts = {
     getPostsByHashtag,
     deletePost,
     updatePost,
     getPosts,
     toggleLike,
-    getPostsByUser
+    getPostsByUser,
+    insertPost
 }
 export default apiPosts;

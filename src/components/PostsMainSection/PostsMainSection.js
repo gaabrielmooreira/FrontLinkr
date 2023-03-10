@@ -4,8 +4,9 @@ import Header from "../Header/Header.js";
 import TrendingCard from "../TrendingsSection/TrendingsSection.js";
 import { Post } from "../PostCard/Styled.js";
 import PostCard from "../PostCard/PostCard.js";
+import InsertPost from "../InsertPost/insertPost.js";
 
-export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged }) {
+export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged}) {
     return (
         <BaseScreen>
             <Header></Header>
@@ -13,6 +14,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                 <h1> {title}</h1>
                 <Section>
                     <ul>
+                        {title === "timeline" && <InsertPost/>}
                         {!posts || posts === "carregando" ? <Post>Carregando . . .</Post> :
                             posts.map((el) =>
                                 <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
