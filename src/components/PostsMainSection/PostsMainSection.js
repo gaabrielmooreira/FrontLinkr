@@ -8,38 +8,25 @@ import PostCard from "../PostCard/PostCard.js";
 export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged }) {
     return (
         <BaseScreen>
-            <Header></Header>
+            <Header />
             <Main>
                 <h1> {title}</h1>
                 <Section>
                     <ul>
-                        {!posts || posts === "carregando" ? <Post>Carregando . . .</Post> :
-                            posts.map((el) =>
-                                <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
-                                </PostCard>)
-                        // {!posts || posts === "carregando" ? <Post>Carregando . . .</Post> :
-                        //     posts.map((el, i) =>
-                        //         <Post key={i}>
-                        // <ReactTagify colors={"white"}
-                        //     tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
-
-                        //     <p>{el.post_description}</p>
-
-                        //              </ReactTagify>
-                        //             <p>{el.like_count}</p>
-                        //             <p>{el.liked_by?.join(", ")}</p>
-                        //             <p>{el.post_link}</p>
-                        //             <p>{el.photo_author}</p>
-                        //             <p>{el.user_liked ? "curtiu" : "não curtiu"}</p>
-                        //             <p>{el.post_author}</p>
-                        //         </Post>)
-                        //}
+                        {posts === "carregando" ? 
+                            <Post>Loading</Post>
+                            :
+                            posts.length === 0 ? 
+                                <Post>There are no posts yet</Post>
+                                :
+                                posts.map((el) =>
+                                    <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                                    </PostCard>)
                         }
                     </ul>
-                <TrendingCard></TrendingCard>
-            </Section>
-
-        </Main>
+                    <TrendingCard />
+                </Section>
+            </Main>
         </BaseScreen >
     )
 }
