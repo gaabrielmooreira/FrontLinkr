@@ -60,15 +60,6 @@ export default function Header(props) {
                             <p>{el.name}</p>
                         </li>)}
                     </ul>
-
-
-
-                    {/* <datalist id="users">
-                        {usersQueryResult.map((el) => 
-                        <option key={el.id} value={el.name} onClick={()=>navigate(`/users/${el.id}`)}>
-                            <img src={el.url}></img>
-                        </option>)}
-                    </datalist> */}
                     <button><AiOutlineSearch size="25px" color="#C6C6C6" /></button>
                 </InputDiv>
             }
