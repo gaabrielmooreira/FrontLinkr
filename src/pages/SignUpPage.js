@@ -25,7 +25,7 @@ export default function SignUpPage() {
     setDisabled(true);
     const body = { email, password, name, url };
     axios
-      .post(`${process.env.REACT_APP_API_BASE_URL}/signup`, body)
+      .post(`${process.env.REACT_APP_API_URL}/signup`, body)
       .then(() => {
         navigate("/");
       })
@@ -64,7 +64,7 @@ export default function SignUpPage() {
             />
             <input
               placeholder="username"
-              type="name"
+              type="text"
               value={name}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, name: e.target.value })

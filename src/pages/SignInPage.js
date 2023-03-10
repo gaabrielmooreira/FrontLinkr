@@ -25,7 +25,7 @@ export default function SignInPage() {
     const body = { email, password };
 
     axios
-      .post(`${process.env.REACT_APP_API_BASE_URL}/signin`, body)
+      .post(`${process.env.REACT_APP_API_URL}/signin`, body)
       .then((res) => {
         const { token, url, name, id } = res.data;
         setUserAuth({ token, url, name, id });
