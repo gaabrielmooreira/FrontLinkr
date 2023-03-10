@@ -104,10 +104,13 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
             <RightContainer>
                 <RightTopContainer>
                     <h2>{post_author}</h2>
-                    <div>
-                        <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' />
-                        <DeleteButton idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
-                    </div>
+                    {
+                        (post_author_id == userAuth.id) &&
+                        <div>
+                            <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' />
+                            <DeleteButton idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
+                        </div>
+                    }
                 </RightTopContainer>
                 {isEditing ?
                     <input
@@ -126,7 +129,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
 
                     </ReactTagify>
                 }
-                <a>{post_link}</a>
+                <a>{console.log(post_link)}</a>
             </RightContainer>
         </Post>
     )

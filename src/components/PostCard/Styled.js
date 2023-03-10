@@ -22,12 +22,12 @@ export const LeftContainer = styled.div`
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        margin-left: 19px;
+        margin-bottom: 19px;
     }
     p{
         width: 50px;
         text-align: center;
-        margin-top: 7px;
+        margin-top: 10px;
         color: #FFFFFF;
         font-family: 'Lato', sans-serif;
         font-size: 11px;
