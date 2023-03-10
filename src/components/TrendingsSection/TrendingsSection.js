@@ -29,7 +29,7 @@ export default function TrendingCard({postsAreChanged}) {
                 <ul>
                     {hashtags.map((el, i) =>
                         <HashtagItem key={i} data-test="hashtag">
-                            <Link to={`/trending/hashtag/${el.name}`}> {el.name}</Link>
+                            <Link to={`/hashtag/${el.name}`}>#{el.name}</Link>
                         </HashtagItem>)}
                 </ul>
             }
@@ -65,9 +65,6 @@ const HashtagItem = styled.li`
     line-height: 23px;
     letter-spacing: 0.05em;
     margin: 5px 0;
-    ::before {
-        content:"#"
-    }
     a { 
         color:${WHITE};
         text-decoration:none;
