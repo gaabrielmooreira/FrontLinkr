@@ -10,7 +10,7 @@ import {
   RightContainer,
 } from "./styled";
 
-export default function InsertPost() {
+export default function InsertPost({postsAreChanged,setPostsAreChanged}) {
   const { userAuth } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(false);
   const [postInfo, setPostInfo] = useState({
@@ -20,7 +20,7 @@ export default function InsertPost() {
 
   const { url, description } = postInfo;
 
-  function onPublish(e) {
+  async function onPublish(e) {
     e.preventDefault();
 
     if (url === "") {
@@ -29,8 +29,9 @@ export default function InsertPost() {
     setDisabled(true);
 
     try {
-      apiPosts.insertPost( description, url, userAuth.token);
+      await apiPosts.insertPost( description, url, userAuth.token);
       setPostInfo({ url: "", description: "" });
+      setPostsAreChanged(!postsAreChanged)
       setDisabled(false);
     } catch (error) {
       console.log(error.message);
@@ -42,7 +43,7 @@ export default function InsertPost() {
   return (
     <Container data-test="publish-box">
       <LeftContainer>
-        <img src={userAuth.url} alt="perfil-image" />
+        <img src={userAuth.url} alt="perfil" />
       </LeftContainer>
       <RightContainer onSubmit={onPublish}>
         <h2>What are you going to share today?</h2>
@@ -66,7 +67,7 @@ export default function InsertPost() {
         />
         <Button>
           <button type="submit" disabled={disabled} data-test="publish-btn" >
-            Publish
+          {!disabled? "Publish" : "Publishing..." }
           </button>
         </Button>
       </RightContainer>

@@ -6,7 +6,7 @@ import { Post } from "../PostCard/Styled.js";
 import PostCard from "../PostCard/PostCard.js";
 import InsertPost from "../InsertPost/insertPost.js";
 
-export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged}) {
+export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged }) {
     return (
         <BaseScreen>
             <Header withSearch={true}></Header>
@@ -14,8 +14,8 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                 <h1 data-test="hashtag-title"> {title}</h1>
                 <Section>
                     <ul>
-                        {title === "timeline" && <InsertPost/>}
-                        {posts === "carregando" ? 
+                        {title === "timeline" && <InsertPost postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />}
+                        {posts === "carregando" ?
                             <Post>Loading</Post>
                             :
                             posts.length === 0 ? 
@@ -26,7 +26,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                     </PostCard>)
                         }
                     </ul>
-                    <TrendingCard />
+                    <TrendingCard postsAreChanged={postsAreChanged}/>
                 </Section>
             </Main>
         </BaseScreen >

@@ -112,7 +112,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                 <RightTopContainer>
                     <h2 onClick={goToUserPage}>{post_author}</h2>
                     {
-                        (post_author_id == userAuth.id) &&
+                        (post_author_id === userAuth.id) &&
                         <div>
                             <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' data-test="edit-btn"/>
                             <DeleteButton idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
