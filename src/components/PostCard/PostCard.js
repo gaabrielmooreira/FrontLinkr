@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) {
-    const { id, post_author_id, post_author, photo_author, 
-        post_description, post_link, liked_by, user_liked, 
+    const { id, post_author_id, post_author, photo_author,
+        post_description, post_link, liked_by, user_liked,
         likes_count, post_link_title, post_link_description, post_link_image } = post;
     const { userAuth } = useContext(AuthContext);
 
@@ -100,12 +100,13 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
             <LeftContainer>
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
                 {isLiked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent data-test="like-btn" onClick={handleLike} />}
-                <p data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} data-test="counter">{likesPost > 1 ? `${likesPost} likes` : `${likesPost} like`}</p>
+                <div data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} data-test="tooltip">
+                    <p data-test="counter" >{likesPost > 1 ? `${likesPost} likes` : `${likesPost} like`}</p>
+                </div>
                 <Tooltip
                     id="my-tooltip"
                     place="bottom"
                     style={{ backgroundColor: "rgba(255,255,255,0.9)", color: "#505050" }}
-                    data-test="tooltip"
                 />
             </LeftContainer>
             <RightContainer>
@@ -114,7 +115,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     {
                         (post_author_id === userAuth.id) &&
                         <div>
-                            <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' data-test="edit-btn"/>
+                            <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' data-test="edit-btn" />
                             <DeleteButton idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
                         </div>
                     }
@@ -133,7 +134,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     <ReactTagify colors={"white"}
                         tagClicked={(tag) => navigate(`/hashtag/${tag.slice(1)}`)}>
 
-                        <PostText data-test="description">{description? description : ""}</PostText>
+                        <PostText data-test="description">{description ? description : ""}</PostText>
 
                     </ReactTagify>
                 }
@@ -141,9 +142,9 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     <div>
                         <h2>{post_link_title}</h2>
                         <p>{post_link_description}</p>
-                        <p>{post_link.length > 45 ? `${post_link.substring(0,45)}...`:`${post_link}`}</p>
+                        <p>{post_link.length > 45 ? `${post_link.substring(0, 45)}...` : `${post_link}`}</p>
                     </div>
-                    <img src={post_link_image} alt={post_link_title}/>
+                    <img src={post_link_image} alt={post_link_title} />
                 </LinkContainer>
             </RightContainer>
         </Post>
