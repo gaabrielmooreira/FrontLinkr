@@ -10,14 +10,18 @@ export default function HomePage() {
 
     useEffect(() => {
         async function getData() {
-            const data = await apiPosts.getPosts(userAuth.token);
-            setPosts(data);
+            try{
+                const data = await apiPosts.getPosts(userAuth.token);
+                setPosts(data);
+            } catch {
+                alert('An error occured while trying to fetch the posts, please refresh the page');
+            }
         }
         getData();
     }, [postsAreChanged])
 
     return (
-        <PostsMainSection title={'timeline'} posts={posts} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+        <PostsMainSection title={'timeline'} posts={!posts? 'carregando' : posts} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
         </PostsMainSection>
     )
 }

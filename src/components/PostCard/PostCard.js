@@ -2,14 +2,16 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/auth";
 import apiPosts from "../../services/apiPosts";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import { EditIcon, Heart, HeartTransparent, LeftContainer, Post, RightContainer, RightTopContainer } from "./Styled";
+import { EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, RightContainer, RightTopContainer } from "./Styled";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) {
-    const { id, post_author_id, post_author, photo_author, post_description, post_link, liked_by, user_liked, likes_count } = post;
+    const { id, post_author_id, post_author, photo_author, 
+        post_description, post_link, liked_by, user_liked, 
+        likes_count, post_link_title, post_link_description, post_link_image } = post;
     const { userAuth } = useContext(AuthContext);
 
     const [isLiked, setIsLiked] = useState(user_liked);
@@ -44,7 +46,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
 
     useEffect(() => {
         function toolTipDescription() {
-            if (!likesPost) return setLikesDescription("Não existem curtidas ainda!");
+            if (!likesPost) return setLikesDescription("");
             if (!isLiked) {
                 if (liked_by && liked_by.length === 1) return setLikesDescription(`${liked_by[0]}`);
                 if (liked_by && liked_by.length === 2) return setLikesDescription(`${liked_by[0]} e ${liked_by[1]}`);
@@ -104,10 +106,13 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
             <RightContainer>
                 <RightTopContainer>
                     <h2>{post_author}</h2>
-                    <div>
-                        <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' />
-                        <DeleteButton idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
-                    </div>
+                    {
+                        (post_author_id == userAuth.id) &&
+                        <div>
+                            <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' />
+                            <DeleteButton idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
+                        </div>
+                    }
                 </RightTopContainer>
                 {isEditing ?
                     <input
@@ -126,7 +131,14 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
 
                     </ReactTagify>
                 }
-                <a>{post_link}</a>
+                <LinkContainer href={post_link} target="_blank">
+                    <div>
+                        <h2>{post_link_title}</h2>
+                        <p>{post_link_description}</p>
+                        <a href={post_link} target="_blank">{post_link}</a>
+                    </div>
+                    <img src={post_link_image} alt={post_link_title}/>
+                </LinkContainer>
             </RightContainer>
         </Post>
     )

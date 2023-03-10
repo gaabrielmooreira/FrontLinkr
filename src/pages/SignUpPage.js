@@ -51,6 +51,7 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setUserInfo({ ...userInfo, email: e.target.value })
               }
+              data-test="email"
             />
             <input
               placeholder="password"
@@ -59,6 +60,7 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setUserInfo({ ...userInfo, password: e.target.value })
               }
+              data-test="password"
             />
             <input
               placeholder="username"
@@ -67,6 +69,7 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setUserInfo({ ...userInfo, name: e.target.value })
               }
+              data-test="username" 
             />
             <input
               placeholder="picture url"
@@ -75,12 +78,13 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setUserInfo({ ...userInfo, url: e.target.value })
               }
+              data-test="picture-url"
             />
-            <button type="submit" disabled={disabled}>
+            <button type="submit" disabled={disabled} data-test="sign-up-btn">
               Sign Up
             </button>
 
-            <Link to={"/sign-in"}>
+            <Link to={"/sign-in"} data-test="login-link">
               <Login>Switch back to log in</Login>
             </Link>
           </Form>

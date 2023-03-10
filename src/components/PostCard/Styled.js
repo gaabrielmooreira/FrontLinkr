@@ -22,12 +22,12 @@ export const LeftContainer = styled.div`
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        margin-left: 19px;
+        margin-bottom: 19px;
     }
     p{
         width: 50px;
         text-align: center;
-        margin-top: 7px;
+        margin-top: 10px;
         color: #FFFFFF;
         font-family: 'Lato', sans-serif;
         font-size: 11px;
@@ -80,13 +80,36 @@ export const RightContainer = styled.div`
             outline: none;
         }
     }
-    a {
-        background-color: ${BLACK};
-        display: block;
-        border: 1px solid #4D4D4D;
-        border-radius: 10px;
-        width: 100%;
-        height: 155px;
+`
+export const LinkContainer = styled.a`
+    background-color: ${BLACK};
+    display: flex;
+    border: 1px solid #4D4D4D;
+    border-radius: 13px;
+    width: 100%;
+    height: 155px;
+    div{
+        padding: 25px 27px 23px 20px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 400;
+    }
+    h2{
+        color: #CECECE;
+        font-size: 16px;
+    }
+    p{
+        color: #9B9595;
+        font-size: 11px;
+    }
+    a{
+        text-decoration: none;
+        color: #CECECE;
+        font-size: 11px;
+    }
+    img{
+        width: 154px;
+        height: 154px;
+        border-radius: 0px 13px 13px 0px;
     }
 `
 
