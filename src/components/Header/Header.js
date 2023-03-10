@@ -37,13 +37,13 @@ export default function Header(props) {
                 </InputDiv>
             }
 
-            <PerfilContainer onClick={() => setShowLogout(!showLogout)}>
+            <PerfilContainer onClick={() => setShowLogout(!showLogout)} data-test="menu">
                 {showLogout ? <IoIosArrowUp size="30px" color="#FFF"/>:<IoIosArrowDown size="30px" color="#FFF"/>}
-                <UserImg src={userAuth.url} alt="perfil-image" />
+                <UserImg src={userAuth.url} alt="perfil-image" data-test="avatar"/>
             </PerfilContainer>
 
-            <LogoutContainer showLogout={showLogout}>
-                <p onClick={logout}>Logout</p>
+            <LogoutContainer showLogout={showLogout} >
+                <p onClick={logout} data-test="logout">Logout</p>
             </LogoutContainer>
         </HeaderContainer>
     )
