@@ -69,7 +69,7 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setUserInfo({ ...userInfo, name: e.target.value })
               }
-              data-test="username" 
+              data-test="username"
             />
             <input
               placeholder="picture url"
