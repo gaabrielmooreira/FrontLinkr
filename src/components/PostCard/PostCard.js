@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/auth";
 import apiPosts from "../../services/apiPosts";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import { EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, RightContainer, RightTopContainer } from "./Styled";
+import { EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, RightContainer, RightTopContainer } from "./Styled";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { useNavigate } from "react-router-dom";
@@ -131,7 +131,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     <ReactTagify colors={"white"}
                         tagClicked={(tag) => navigate(`/trending/hashtag/${tag.slice(1)}`)}>
 
-                        <p>{description? description : ""}</p>
+                        <PostText>{description? description : ""}</PostText>
 
                     </ReactTagify>
                 }
@@ -139,7 +139,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     <div>
                         <h2>{post_link_title}</h2>
                         <p>{post_link_description}</p>
-                        <a href={post_link} target="_blank">{post_link}</a>
+                        <p>{post_link.length > 45 ? `${post_link.substring(0,45)}...`:`${post_link}`}</p>
                     </div>
                     <img src={post_link_image} alt={post_link_title}/>
                 </LinkContainer>
