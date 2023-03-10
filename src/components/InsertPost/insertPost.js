@@ -47,7 +47,7 @@ export default function InsertPost() {
       <RightContainer onSubmit={onPublish}>
         <h2>What are you going to share today?</h2>
         <InputUrl
-          placeholder="htpp://..."
+          placeholder="http://..."
           type="url"
           value={url}
           onChange={(e) => setPostInfo({ ...postInfo, url: e.target.value })}
