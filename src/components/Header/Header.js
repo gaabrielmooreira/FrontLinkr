@@ -21,13 +21,13 @@ export default function Header(props) {
 
     const goToHome = () => {
         closeMenu();
-        navigate('/');
+        navigate('/timeline');
     }
 
     const logout = () => {
         apiAuth.signOut(userAuth.token)
         localStorage.removeItem("user")
-        navigate('/sign-in');
+        navigate('/');
         closeMenu();
     }
 

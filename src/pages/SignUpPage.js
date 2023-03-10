@@ -27,7 +27,7 @@ export default function SignUpPage() {
     axios
       .post(`${process.env.REACT_APP_API_BASE_URL}/signup`, body)
       .then(() => {
-        navigate("/sign-in");
+        navigate("/");
       })
       .catch((err) => {
         alert(err.response.data);
@@ -84,7 +84,7 @@ export default function SignUpPage() {
               Sign Up
             </button>
 
-            <Link to={"/sign-in"} data-test="login-link">
+            <Link to={"/"} data-test="login-link">
               <Login>Switch back to log in</Login>
             </Link>
           </Form>
