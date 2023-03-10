@@ -11,8 +11,8 @@ export default function App() {
     <BrowserRouter>
     <AuthProvider>
       <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/timeline" element={<HomePage />} />
+          <Route path="/" element={<SignInPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/trending/hashtag/:hashtag" element={<HashtagPage />} />
           <Route path="/user/:idUser" element={<UserPage />} />
