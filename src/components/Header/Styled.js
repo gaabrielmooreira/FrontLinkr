@@ -157,3 +157,9 @@ export const LogoutContainer = styled.div`
 export const userCardSearch = styled.ul`
 
 `
+export const FollowingText = styled.p`
+    color: #C5C5C5;
+    &::before {
+        content:'• '
+    }
+`

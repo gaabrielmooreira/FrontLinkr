@@ -1,4 +1,4 @@
-import { HeaderContainer, InputDiv, LogoutContainer, PerfilContainer, StyledH1, UserImg } from "./Styled";
+import { FollowingText, HeaderContainer, InputDiv, LogoutContainer, PerfilContainer, StyledH1, UserImg } from "./Styled";
 import { useContext, useState } from "react";
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
@@ -32,7 +32,7 @@ export default function Header(props) {
     }
 
     async function handleUserSearch(string) {
-        if (!string) setUsersQueryResult([])
+        if (!string) return setUsersQueryResult([])
         setQuery(string)
         try {
             const users = await apiUsers.getUsers(string, userAuth.token)
@@ -68,6 +68,7 @@ export default function Header(props) {
                         <li key={el.id} onClick={()=>handleClick(el.id)} data-test="user-search">
                             <img src={el.photo_user} alt={el.name}/>
                             <p>{el.name}</p>
+                            {el.is_following && <FollowingText>following</FollowingText>}
                         </li>)}
                     </ul>
                     <button><AiOutlineSearch size="25px" color="#C6C6C6" /></button>
