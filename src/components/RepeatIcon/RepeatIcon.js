@@ -1,10 +1,32 @@
-import styled from "styled-components";
-import { RiRepeatLine } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/auth";
 import apiPosts from "../../services/apiPosts";
+import { Box, Icon,ModalContainer, ModalBox} from "./Styled";
+import { ColorRing } from 'react-loader-spinner'
 
 export default function RepeatIcon({idPost}) {
     const [rePostcount, setRePostCount] = useState(0)
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [insertIsLoading, setInsertIsLoading] = useState(false);
+    const { userAuth } = useContext(AuthContext);
+
+    const handleOpenModal = () => setModalIsOpen(true);
+    const handleCloseModal = () => setModalIsOpen(false);
+    const createRePost = async () => {
+        setInsertIsLoading(true)
+
+        try {
+            await apiPosts.insertRePost(idPost, userAuth.token)
+            setInsertIsLoading(false);
+            setModalIsOpen(false);
+        } catch (error) {
+            setInsertIsLoading(false);
+            setModalIsOpen(false);
+            console.log(error);
+            alert("Create re-post Failed.");
+        }
+
+    }
 
     useEffect(()=>{
         try {
@@ -16,37 +38,40 @@ export default function RepeatIcon({idPost}) {
         } catch (error) {
             console.log(error.message)
         }
-    },[])
+    },[createRePost])
 
 
   return (
+    <>
     <Box>
-      <Icon />
+      <Icon onClick={handleOpenModal}/>
       <p>{`${rePostcount} re-post`}</p>
     </Box>
+    {modalIsOpen &&
+                <ModalContainer>
+                    <ModalBox>
+                        <h2>Do you want to re-post this link?</h2>
+                        {insertIsLoading ?
+                            <ColorRing
+                                visible={true}
+                                height="80"
+                                width="80"
+                                ariaLabel="blocks-loading"
+                                wrapperStyle={{}}
+                                wrapperClass="blocks-wrapper"
+                                colors={['#1877F2', '#1877F2', '#1877F2', '#1877F2', '#1877F2']}
+                            />
+                            :
+                            <div>
+                                <button onClick={handleCloseModal} data-test="cancel">No, cancel</button>
+                                <button onClick={createRePost} data-test="confirm">Yes, share!</button>
+                            </div>
+                        }
+                    </ModalBox>
+                </ModalContainer>
+            }
+    </>
   );
 }
 
-const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  p {
-    font-family: "Lato";
-    font-weight: 400;
-    font-size: 11px;
-    line-height: 13px;
-    text-align: center;
-    color: #ffffff;
-    margin-top: 5px;
-  }
-`;
 
-const Icon = styled(RiRepeatLine)`
-  color: #ffffff;
-  font-size: 20px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
