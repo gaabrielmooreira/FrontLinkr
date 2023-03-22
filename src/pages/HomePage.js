@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.js";
 import apiPosts from "../services/apiPosts.js";
 import useInterval from "use-interval";
+import apiFollow from "../services/apiFollow";
 
 export default function HomePage() {
     const [posts, setPosts] = useState([]);
@@ -10,12 +11,15 @@ export default function HomePage() {
     const [postsAreChanged, setPostsAreChanged] = useState(false);
     const { userAuth } = useContext(AuthContext);
     const [dateOfLastUpdate, setDateOfLastUpdate] = useState('');
+    const [isFollowingOne, setIsFollowingOne] = useState(true);
 
     useEffect(() => {
         async function getData() {
             try {
                 const data = await apiPosts.getPosts(userAuth.token);
                 setPosts(data);
+                const isFollowingAtLeastOne = await apiFollow.followingAtLeastOne(userAuth.token);
+                setIsFollowingOne(isFollowingAtLeastOne);
                 setDateOfLastUpdate(Date.now());
             } catch {
                 alert('An error occured while trying to fetch the posts, please refresh the page');
@@ -55,6 +59,7 @@ export default function HomePage() {
             setPostsAreChanged={setPostsAreChanged}
             newPostsAvailable={newPostsAvailable}
             getNewPosts={getNewPosts}
+            isFollowingOne={isFollowingOne}
         >
         </PostsMainSection>
     )

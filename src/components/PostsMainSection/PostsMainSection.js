@@ -5,9 +5,9 @@ import TrendingCard from "../TrendingsSection/TrendingsSection.js";
 import { Post } from "../PostCard/Styled.js";
 import PostCard from "../PostCard/PostCard.js";
 import InsertPost from "../InsertPost/insertPost.js";
-import {BiRefresh} from "react-icons/bi"
+import { BiRefresh } from "react-icons/bi"
 
-export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts , toggleFollow, isFollowed}) {
+export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, isFollowed, isFollowingOne }) {
     return (
         <BaseScreen>
             <Header withSearch={true}></Header>
@@ -19,29 +19,32 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                     </div>
                     {toggleFollow && <button
                         onClick={() => toggleFollow()}
-                        disabled={isFollowed==="waiting"}
+                        disabled={isFollowed === "waiting"}
                     >
-                        {isFollowed === "waiting" ? ". . .": isFollowed? "Unfollow" : "Follow"}
+                        {isFollowed === "waiting" ? ". . ." : isFollowed ? "Unfollow" : "Follow"}
                     </button>}
                 </TitleConteiner>
                 <Section>
                     <ul>
                         {title === "timeline" && <InsertPost postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />}
-                        {(newPostsAvailable > 0) && 
+                        {(newPostsAvailable > 0) &&
                             <ButtonNewPosts onClick={() => getNewPosts()}>
                                 <span>{newPostsAvailable} new posts, load more!</span>
-                                <BiRefresh color="#FFF" size="22px"/>
+                                <BiRefresh color="#FFF" size="22px" />
                             </ButtonNewPosts>
                         }
                         {posts === "carregando" ?
                             <Post>Loading</Post>
                             :
-                            posts.length === 0 ?
-                                <Post data-test="message">There are no posts yet</Post>
+                            (title === "timeline" && isFollowingOne === false) ?
+                                <NotFoundContainer>You don't follow anyone yet. Search for new friends!</NotFoundContainer>
                                 :
-                                posts.map((el) =>
-                                    <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
-                                    </PostCard>)
+                                posts.length === 0 ?
+                                    <NotFoundContainer data-test="message">No posts found from your friends</NotFoundContainer>
+                                    :
+                                    posts.map((el) =>
+                                        <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                                        </PostCard>)
                         }
                     </ul>
                     <TrendingCard postsAreChanged={postsAreChanged} />
@@ -115,4 +118,11 @@ const ButtonNewPosts = styled.button`
     &:hover{
         cursor: pointer;
     }
+`
+
+const NotFoundContainer = styled.p`
+    color: #FFFFFF;
+    font-size: 27px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
 `

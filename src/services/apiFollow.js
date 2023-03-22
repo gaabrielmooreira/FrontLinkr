@@ -14,9 +14,14 @@ async function isFollowed(token,followed_user_id) {
     const {data: res} = await axios.get(`${process.env.REACT_APP_API_URL}/follow/${followed_user_id}`,createConfig(token)); 
     return res
 }
+async function followingAtLeastOne(token) {
+    const {data: res} = await axios.get(`${process.env.REACT_APP_API_URL}/following/check`, createConfig(token));
+    return res
+}
 const apiFollow = {
     follow,
     unfollow,
-    isFollowed
+    isFollowed,
+    followingAtLeastOne
 }
 export default apiFollow;
