@@ -35,7 +35,7 @@ export default function Header(props) {
         if (!string) return setUsersQueryResult([])
         setQuery(string)
         try {
-            const users = await apiUsers.getUsers(string, userAuth.token)
+            const users = await apiUsers.getUsersByString(string, userAuth.token)
             setUsersQueryResult(users)
 
         } catch (error) {

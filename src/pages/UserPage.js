@@ -4,19 +4,23 @@ import PostsMainSection from "../components/PostsMainSection/PostsMainSection"
 import { AuthContext } from "../context/auth"
 import apiFollow from "../services/apiFollow"
 import apiPosts from "../services/apiPosts"
+import apiUsers from "../services/apiUsers"
 
 
 export default function UserPage() {
     const { idUser } = useParams()
     const [posts, setPosts] = useState(undefined)
     const { userAuth } = useContext(AuthContext)
-    const [author, setAuthor] = useState(undefined)
+    const [user, setUser] = useState({name:"",photo_user:""})
     const [isFollowed, setIsFollowed] = useState(false)
 
     useEffect(() => {
         try {
-            const promise = apiFollow.isFollowed(userAuth.token, Number(idUser))
-            promise.then(res => setIsFollowed(res))
+            const promise = apiUsers.getUserByID(Number(idUser), userAuth.token)
+            promise.then(({ name, photo_user, is_following }) => {
+                setIsFollowed(is_following)
+                setUser({ name, photo_user })
+            })
         } catch (error) {
             console.log(error.message)
         }
@@ -24,7 +28,6 @@ export default function UserPage() {
             const data = apiPosts.getPostsByUser(idUser, userAuth.token)
             data.then((res) => {
                 setPosts(res)
-                setAuthor(res[0].post_author)
             })
         } catch (error) {
             console.log(error.message)
@@ -39,7 +42,7 @@ export default function UserPage() {
                 const promise = apiFollow.follow(userAuth.token, Number(idUser))
                 promise.then(() => setIsFollowed(true))
                     .catch(() => {
-                        alert(`Something went wrong. Coudn't follow ${author}`)
+                        alert(`Something went wrong. Coudn't follow ${user.name}`)
                         setIsFollowed(false)
                     })
             } catch (error) {
@@ -50,10 +53,10 @@ export default function UserPage() {
             try {
                 const promise = apiFollow.unfollow(userAuth.token, Number(idUser))
                 promise.then(() => setIsFollowed(false))
-                .catch(() => {
-                    alert(`Something went wrong. Coudn't unfollow ${author}`)
-                    setIsFollowed(true)
-                })
+                    .catch(() => {
+                        alert(`Something went wrong. Coudn't unfollow ${user.name}`)
+                        setIsFollowed(true)
+                    })
             } catch (error) {
                 console.log(error.message)
             }
@@ -61,6 +64,12 @@ export default function UserPage() {
     }
 
     return (
-        <PostsMainSection toggleFollow={Number(idUser) !== userAuth.id && toggleFollow} isFollowed={isFollowed} title={author} posts={!posts ? 'carregando' : posts} />
+        <PostsMainSection
+            toggleFollow={Number(idUser) !== userAuth.id && toggleFollow}
+            isFollowed={isFollowed}
+            title={`${user.name}’s posts`}
+            user_photo={user.photo_user}
+            posts={!posts ? 'carregando' : posts}
+        />
     )
 }
