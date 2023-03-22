@@ -33,18 +33,22 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                 <BiRefresh color="#FFF" size="22px" />
                             </ButtonNewPosts>
                         }
-                        {posts === "carregando" ?
+                        {posts === "carregando" ? 
                             <Post>Loading</Post>
                             :
-                            (title === "timeline" && isFollowingOne === false) ?
-                                <NotFoundContainer>You don't follow anyone yet. Search for new friends!</NotFoundContainer>
+                            posts.length === 0 ?
+                                <NotFoundContainer>
+                                    {title === "timeline" ? 
+                                        (isFollowingOne === false ? "You don't follow anyone yet. Search for new friends!":"No posts found from your friends")
+                                        :
+                                        "There are no posts yet"
+                                    }
+                                </NotFoundContainer>
                                 :
-                                posts.length === 0 ?
-                                    <NotFoundContainer data-test="message">No posts found from your friends</NotFoundContainer>
-                                    :
-                                    posts.map((el) =>
-                                        <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
-                                        </PostCard>)
+                                posts.map((el) =>
+                                    <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                                    </PostCard>
+                                )
                         }
                     </ul>
                     <TrendingCard postsAreChanged={postsAreChanged} />
@@ -121,6 +125,7 @@ const ButtonNewPosts = styled.button`
 `
 
 const NotFoundContainer = styled.p`
+    width: 611px;
     color: #FFFFFF;
     font-size: 27px;
     font-family: 'Lato', sans-serif;

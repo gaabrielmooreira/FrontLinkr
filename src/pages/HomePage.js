@@ -6,33 +6,39 @@ import useInterval from "use-interval";
 import apiFollow from "../services/apiFollow";
 
 export default function HomePage() {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState(undefined);
     const [newPostsAvailable, setNewPostsAvailable] = useState(0);
     const [postsAreChanged, setPostsAreChanged] = useState(false);
     const { userAuth } = useContext(AuthContext);
     const [dateOfLastUpdate, setDateOfLastUpdate] = useState('');
-    const [isFollowingOne, setIsFollowingOne] = useState(true);
+    const [isFollowingOne, setIsFollowingOne] = useState();
 
     useEffect(() => {
         async function getData() {
             try {
                 const data = await apiPosts.getPosts(userAuth.token);
                 setPosts(data);
-                const isFollowingAtLeastOne = await apiFollow.followingAtLeastOne(userAuth.token);
-                setIsFollowingOne(isFollowingAtLeastOne);
                 setDateOfLastUpdate(Date.now());
             } catch {
                 alert('An error occured while trying to fetch the posts, please refresh the page');
             }
         }
+        async function getFollowingOne(){
+            try{
+                const isFollowingAtLeastOne = await apiFollow.followingAtLeastOne(userAuth.token);
+                setIsFollowingOne(isFollowingAtLeastOne);
+            } catch(err){
+                console.log(err.message);
+            }
+        }
         getData();
+        getFollowingOne();
     }, [postsAreChanged])
 
     useInterval(async () => {
         try {
             const data = await apiPosts.getPostsAfterDate(dateOfLastUpdate, userAuth.token);
             const newPostsLength = data.length;
-            console.log(newPostsLength);
             setNewPostsAvailable(newPostsLength);
         } catch (err) {
             console.log(err);
