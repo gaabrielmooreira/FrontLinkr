@@ -7,15 +7,17 @@ import PostCard from "../PostCard/PostCard.js";
 import InsertPost from "../InsertPost/insertPost.js";
 import { BiRefresh } from "react-icons/bi"
 
-export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, isFollowed, isFollowingOne }) {
+export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, isFollowed, isFollowingOne, user_photo }) {
     return (
         <BaseScreen>
             <Header withSearch={true}></Header>
             <Main>
                 <TitleConteiner isFollowed={isFollowed}>
                     <div>
-                        {/* <img src="" alt="" /> */}
-                        <h1 data-test="hashtag-title">{title}’s posts</h1>
+                        {
+                            user_photo && <PhotoUser src={user_photo} alt={title} />
+                        }
+                        <h1 data-test="hashtag-title">{title}</h1>
                     </div>
                     {toggleFollow && <button
                         onClick={() => toggleFollow()}
@@ -62,6 +64,11 @@ const TitleConteiner = styled.div`
     justify-content:space-between;
     align-items:center;
     padding: 0 10px;
+    div {
+        display:flex;
+        align-items:center;
+        gap: 20px;
+    }
     h1 {
         font-family: 'Oswald';
         font-weight: 700;
@@ -90,6 +97,12 @@ const TitleConteiner = styled.div`
     }
     }
 
+`
+
+const PhotoUser = styled.img`
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 `
 const Section = styled.div`
     width:100%;
