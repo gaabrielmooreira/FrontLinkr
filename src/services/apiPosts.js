@@ -34,6 +34,15 @@ async function insertPost(description, link, token){
     return await axios.post(`${process.env.REACT_APP_API_URL}/create-post`, body, createConfig(token))
 }
 
+async function insertRePost(idPost, token){
+    const body ={idPost}
+    return await axios.post(`${process.env.REACT_APP_API_URL}/re-post`, body, createConfig(token))
+}
+
+async function getRePostCount(idPost){
+    return await axios.get(`${process.env.REACT_APP_API_URL}/re-post/${idPost}`)
+}
+
 const apiPosts = {
     getPostsByHashtag,
     deletePost,
@@ -41,6 +50,9 @@ const apiPosts = {
     getPosts,
     toggleLike,
     getPostsByUser,
-    insertPost
+    insertPost,
+    insertRePost,
+    getRePostCount
+
 }
 export default apiPosts;

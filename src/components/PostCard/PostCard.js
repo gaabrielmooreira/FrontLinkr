@@ -2,11 +2,12 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/auth";
 import apiPosts from "../../services/apiPosts";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import { EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, RightContainer, RightTopContainer } from "./Styled";
+import { EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, ReactionContainer, RightContainer, RightTopContainer } from "./Styled";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
+import RepeatIcon from "../RepeatIcon/RepeatIcon";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) {
     const { id, post_author_id, post_author, photo_author,
@@ -99,6 +100,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
         <Post data-test="post">
             <LeftContainer>
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
+                <ReactionContainer>
                 {isLiked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent data-test="like-btn" onClick={handleLike} />}
                 <div data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} data-test="tooltip">
                     <p data-test="counter" >{likesPost > 1 ? `${likesPost} likes` : `${likesPost} like`}</p>
@@ -108,6 +110,9 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     place="bottom"
                     style={{ backgroundColor: "rgba(255,255,255,0.9)", color: "#505050" }}
                 />
+                
+                <RepeatIcon idPost={id}/>
+                </ReactionContainer>
             </LeftContainer>
             <RightContainer>
                 <RightTopContainer>
