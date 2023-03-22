@@ -27,20 +27,30 @@ export const LeftContainer = styled.div`
             cursor: pointer;
         }
     }
+   
+`
+
+export const ReactionContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
     p{
         width: 50px;
         text-align: center;
-        margin-top: 10px;
+        margin-top: 5px;
+        margin-bottom: 20px;
         color: #FFFFFF;
         font-family: 'Lato', sans-serif;
         font-size: 11px;
         font-weight: 400;
     }
+
 `
 
 export const HeartTransparent = styled(FaRegHeart)`
     color: #FFFFFF;
-    font-size: 30px;
+    font-size: 20px;
     &:hover{
         cursor: pointer;
     }
@@ -48,7 +58,7 @@ export const HeartTransparent = styled(FaRegHeart)`
 
 export const Heart = styled(FaHeart)`
     color: #AC0000;
-    font-size: 30px;
+    font-size: 20px;
     &:hover{
         cursor: pointer;
     }

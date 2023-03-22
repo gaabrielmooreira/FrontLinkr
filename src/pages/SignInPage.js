@@ -87,7 +87,7 @@ const ScreenContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 827px) {
+  @media (max-width: 768px) {
     display: block;
   }
 `;
@@ -102,7 +102,7 @@ const LeftContainer = styled.div`
   box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
   padding-left: 10%;
 
-  @media (max-width: 827px) {
+  @media (max-width: 768px) {
     width: 100%;
     min-height: 175px;
     padding: 0;
@@ -119,7 +119,7 @@ const Logo = styled.div`
   letter-spacing: 0.05em;
   color: #ffffff;
 
-  @media (max-width: 827px) {
+  @media (max-width: 768px) {
     font-size: 76px;
     line-height: 84px;
   }
@@ -135,7 +135,7 @@ const Slogan = styled.div`
   line-height: 64px;
   color: #ffffff;
 
-  @media (max-width: 827px) {
+  @media (max-width: 768px) {
     width: 237px;
     height: 68px;
     font-size: 23px;
@@ -151,7 +151,7 @@ const RigthContainer = styled.div`
   justify-content: center;
   background: #333333;
 
-  @media (max-width: 827px) {
+  @media (max-width: 768px) {
     width: 100%;
     min-height: 80vh;
   }
@@ -165,7 +165,7 @@ const Form = styled.form`
   height: 100vh;
   width: 100vw;
 
-  @media (max-width: 827px) {
+  @media (max-width: 768px) {
     justify-content: start;
     margin-top: 40px;
   }
@@ -181,7 +181,7 @@ const Form = styled.form`
     color: #9f9f9f;
     margin-top: 10px;
 
-    @media (max-width: 827px) {
+    @media (max-width: 768px) {
       font-size: 22px;
       line-height: 33px;
     }
@@ -199,7 +199,7 @@ const Form = styled.form`
     color: #ffffff;
     margin-top: 10px;
 
-    @media (max-width: 827px) {
+    @media (max-width: 768px) {
       font-size: 22px;
       line-height: 33px;
     }

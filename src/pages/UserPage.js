@@ -21,7 +21,7 @@ export default function UserPage() {
             console.log(error.message)
         }
         try {
-            const data = apiPosts.getPostsByUser(idUser, userAuth.token)
+            const data = apiPosts.getRePostCount(idUser, userAuth.token)
             data.then((res) => {
                 setPosts(res)
                 setAuthor(res[0].post_author)
