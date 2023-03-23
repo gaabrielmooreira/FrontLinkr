@@ -2,12 +2,14 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/auth";
 import apiPosts from "../../services/apiPosts";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import { EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, ReactionContainer, RightContainer, RightTopContainer } from "./Styled";
+import { ContainerGlobal, EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, ReactionContainer, RightContainer, RightTopContainer } from "./Styled";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
 import RepeatIcon from "../RepeatIcon/RepeatIcon";
+import CommentIcon from "../CommentIcon/CommentIcon";
+import CommentsBox from "../CommentsBox/CommentsBox";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost}) {
     const { post_id, post_author_id, post_author, photo_author,
@@ -26,6 +28,8 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
     const [descriptionInput, setDescriptionInput] = useState(description);
     const inputRef = useRef(null);
 
+    const [numberComments, setNumberComments] = useState(0);
+    const [showComments, setShowComments] = useState(false);
     const navigate = useNavigate();
 
     // Like 
@@ -98,6 +102,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
     }
 
     return (
+        <ContainerGlobal>
         <Post data-test="post">
             <LeftContainer>
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
@@ -111,7 +116,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                     place="bottom"
                     style={{ backgroundColor: "rgba(255,255,255,0.9)", color: "#505050" }}
                 />
-                
+                <CommentIcon number={numberComments} showComments={showComments} setShowComments={setShowComments}/>
                 <RepeatIcon idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}/>
                 </ReactionContainer>
             </LeftContainer>
@@ -154,5 +159,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                 </LinkContainer>
             </RightContainer>
         </Post>
+        <CommentsBox showComments={showComments} setNumber={setNumberComments} photo={photo_author}/>
+        </ContainerGlobal>
     )
 }

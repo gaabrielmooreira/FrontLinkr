@@ -3,6 +3,10 @@ import { BLACK } from "../../constants/COLORS.js";
 import { BiEditAlt } from 'react-icons/bi'
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
+export const ContainerGlobal = styled.div`
+ margin-bottom: 29px; 
+ `
+
 export const Post = styled.li`
     display: flex;
     width:611px;
@@ -10,7 +14,8 @@ export const Post = styled.li`
     min-height:276px;
     border-radius:16px;
     padding:20px;
-    background-color: ${BLACK}
+    background-color: ${BLACK};
+    position: relative;
 `
 
 export const LeftContainer = styled.div`
