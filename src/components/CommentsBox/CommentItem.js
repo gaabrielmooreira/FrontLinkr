@@ -44,7 +44,7 @@ span{
 p{
     font-weight: 700;
     color: #F3F3F3;
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 }
 h1{
     font-weight:400;
