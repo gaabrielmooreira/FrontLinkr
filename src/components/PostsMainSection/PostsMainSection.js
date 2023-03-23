@@ -30,7 +30,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                     <ul>
                         {title === "timeline" && <InsertPost postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />}
                         {(newPostsAvailable > 0) &&
-                            <ButtonNewPosts onClick={() => getNewPosts()}>
+                            <ButtonNewPosts data-test="load-btn" onClick={() => getNewPosts()}>
                                 <span>{newPostsAvailable} new posts, load more!</span>
                                 <BiRefresh color="#FFF" size="22px" />
                             </ButtonNewPosts>
@@ -39,9 +39,9 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                             <Post>Loading</Post>
                             :
                             posts.length === 0 ?
-                                <NotFoundContainer>
+                                <NotFoundContainer data-test="message">
                                     {title === "timeline" ? 
-                                        (isFollowingOne === false ? "You don't follow anyone yet. Search for new friends!":"No posts found from your friends")
+                                        isFollowingOne ? "No posts found from your friends":"You don't follow anyone yet. Search for new friends!"
                                         :
                                         "There are no posts yet"
                                     }
