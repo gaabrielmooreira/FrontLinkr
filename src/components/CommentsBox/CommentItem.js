@@ -16,7 +16,7 @@ export default function CommentItem({ item }) {
 }
 
 const Picture = styled.img`
-width: 39px;
+width: 38px;
 border-radius: 100%;
 margin-right: 17px;
 `
