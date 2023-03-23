@@ -6,7 +6,7 @@ import { Post } from "../PostCard/Styled.js";
 import PostCard from "../PostCard/PostCard.js";
 import InsertPost from "../InsertPost/insertPost.js";
 import { BiRefresh } from "react-icons/bi"
-import RePostCard from "../RePostCard/RePostCard.js";
+import RePostCard from "../RePostBox/RePostBox.js";
 
 
 
@@ -57,7 +57,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                         </PostCard> )
                                     }else{
                                         return (
-                                            <RePostCard key={i} post={el} />
+                                            <PostCard key={i} post={el} isRePost={true}> </PostCard>
                                         )
                                     }
                                     
