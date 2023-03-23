@@ -124,10 +124,15 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                 <RightTopContainer>
                     <h2 data-test="username" onClick={goToUserPage}>{post_author}</h2>
                     {
-                        (post_author_id === userAuth.id) &&
+                        (post_author_id === userAuth.id && !isRePost) &&
                         <div>
-                            <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' data-test="edit-btn" />
-                            <DeleteButton idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
+                            <EditIcon 
+                                onClick={() => isEditing ? cancelEdit() : openEdit()} 
+                                color='#FFF' 
+                                size='20px' 
+                                data-test="edit-btn" 
+                            />
+                            <DeleteButton idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}/>
                         </div>
                     }
                 </RightTopContainer>

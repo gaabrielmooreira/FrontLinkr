@@ -19,7 +19,7 @@ export default function CommentsBox({showComments, setNumber, photo}) {
             setNumber(commentsArray.length);
         
         } catch (error) {
-            alert(error.message);
+            // alert(error.message);
         }
     }, []);
 
