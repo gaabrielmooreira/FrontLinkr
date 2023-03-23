@@ -6,13 +6,8 @@ async function getPostsByHashtag(hashtag, token) {
     return res
 }
 
-async function getPosts(token) {
-    const { data: res } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, createConfig(token));
-    return res;
-}
-
-async function getPostsAfterDate(date, token) {
-    const { data: res } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/since/${date}`, createConfig(token));
+async function getPostsAndRepostsAfterDate(date, token) {
+    const { data: res } = await axios.get(`${process.env.REACT_APP_API_URL}/posts-reposts/since/${date}`, createConfig(token));
     return res;
 }
 
@@ -20,6 +15,7 @@ async function toggleLike(idPost, token) {
     const body = {};
     return await axios.post(`${process.env.REACT_APP_API_URL}/posts/${idPost}/like`, body, createConfig(token));
 }
+
 async function updatePost(idPost, postDescription, token) {
     const body = { postDescription };
     return await axios.put(`${process.env.REACT_APP_API_URL}/posts/${idPost}`, body, createConfig(token));
@@ -49,7 +45,7 @@ async function getRePostCount(idPost){
 }
 
 async function getPostsAndRePosts(token){
-    const { data: res } = await axios.get(`${process.env.REACT_APP_API_URL}/post-reposts`, createConfig(token))
+    const { data: res } = await axios.get(`${process.env.REACT_APP_API_URL}/posts-reposts`, createConfig(token))
     return res
 }
 
@@ -57,13 +53,12 @@ const apiPosts = {
     getPostsByHashtag,
     deletePost,
     updatePost,
-    getPosts,
     toggleLike,
     getPostsByUser,
     insertPost,
     insertRePost,
     getRePostCount,
-    getPostsAfterDate,
+    getPostsAndRepostsAfterDate,
     getPostsAndRePosts
 }
 export default apiPosts;

@@ -10,9 +10,10 @@ import { ReactTagify } from "react-tagify";
 import RepeatIcon from "../RepeatIcon/RepeatIcon";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost}) {
-    const { id, post_author_id, post_author, photo_author,
+    const { post_id, post_author_id, post_author, photo_author,
         post_description, post_link, liked_by, user_liked,
         likes_count, post_link_title, post_link_description, post_link_image } = post;
+        
     const { userAuth } = useContext(AuthContext);
 
     const [isLiked, setIsLiked] = useState(user_liked);
@@ -30,7 +31,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
     // Like 
     const handleLike = async () => {
         try {
-            await apiPosts.toggleLike(id, userAuth.token);
+            await apiPosts.toggleLike(post_id, userAuth.token);
             if (isLiked) {
                 const newLikesPost = Number(likesPost) - 1;
                 setLikesPost(newLikesPost);
@@ -83,7 +84,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
         if (event.key === 'Enter') {
             setIsConfirmingEdit(true);
             try {
-                await apiPosts.updatePost(id, descriptionInput, userAuth.token);
+                await apiPosts.updatePost(post_id, descriptionInput, userAuth.token);
                 setDescription(descriptionInput);
                 setIsConfirmingEdit(false);
                 setIsEditing(false);
@@ -111,7 +112,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                     style={{ backgroundColor: "rgba(255,255,255,0.9)", color: "#505050" }}
                 />
                 
-                <RepeatIcon idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}/>
+                <RepeatIcon idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}/>
                 </ReactionContainer>
             </LeftContainer>
             <RightContainer>
@@ -121,7 +122,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                         (post_author_id === userAuth.id) &&
                         <div>
                             <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' data-test="edit-btn" />
-                            <DeleteButton idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
+                            <DeleteButton idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
                         </div>
                     }
                 </RightTopContainer>

@@ -4,7 +4,6 @@ import { AuthContext } from "../context/auth.js";
 import apiPosts from "../services/apiPosts.js";
 import useInterval from "use-interval";
 import apiFollow from "../services/apiFollow";
-import RePostCard from "../components/RePostCard/RePostCard";
 
 export default function HomePage() {
     const [posts, setPosts] = useState(undefined);
@@ -25,11 +24,11 @@ export default function HomePage() {
                 alert('An error occured while trying to fetch the posts, please refresh the page');
             }
         }
-        async function getFollowingOne(){
-            try{
+        async function getFollowingOne() {
+            try {
                 const isFollowingAtLeastOne = await apiFollow.followingAtLeastOne(userAuth.token);
                 setIsFollowingOne(isFollowingAtLeastOne);
-            } catch(err){
+            } catch (err) {
                 console.log(err.message);
             }
         }
@@ -39,7 +38,7 @@ export default function HomePage() {
 
     useInterval(async () => {
         try {
-            const data = await apiPosts.getPostsAfterDate(dateOfLastUpdate, userAuth.token);
+            const data = await apiPosts.getPostsAndRepostsAfterDate(dateOfLastUpdate, userAuth.token);
             const newPostsLength = data.length;
             setNewPostsAvailable(newPostsLength);
         } catch (err) {
@@ -49,7 +48,7 @@ export default function HomePage() {
 
     const getNewPosts = async () => {
         try {
-            const data = await apiPosts.getPostsAfterDate(dateOfLastUpdate, userAuth.token);
+            const data = await apiPosts.getPostsAndRepostsAfterDate(dateOfLastUpdate, userAuth.token);
             const arrNewPosts = [...data, ...posts];
             setPosts(arrNewPosts);
             setDateOfLastUpdate(Date.now());
@@ -61,19 +60,16 @@ export default function HomePage() {
 
     return (
         <>
-        <PostsMainSection 
-            title={'timeline'} 
-            posts={!posts ? 'carregando' : posts} 
-            postsAreChanged={postsAreChanged} 
-            setPostsAreChanged={setPostsAreChanged}
-            newPostsAvailable={newPostsAvailable}
-            getNewPosts={getNewPosts}
-            isFollowingOne={isFollowingOne}
-        >
-        </PostsMainSection>
-
-        
-        
-        </> 
+            <PostsMainSection
+                title={'timeline'}
+                posts={!posts ? 'carregando' : posts}
+                postsAreChanged={postsAreChanged}
+                setPostsAreChanged={setPostsAreChanged}
+                newPostsAvailable={newPostsAvailable}
+                getNewPosts={getNewPosts}
+                isFollowingOne={isFollowingOne}
+            >
+            </PostsMainSection>
+        </>
     )
 }
