@@ -6,6 +6,9 @@ import { Post } from "../PostCard/Styled.js";
 import PostCard from "../PostCard/PostCard.js";
 import InsertPost from "../InsertPost/insertPost.js";
 import { BiRefresh } from "react-icons/bi"
+import RePostCard from "../RePostCard/RePostCard.js";
+
+
 
 export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, isFollowed, isFollowingOne, user_photo }) {
     return (
@@ -47,11 +50,23 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                     }
                                 </NotFoundContainer>
                                 :
-                                posts.map((el) =>
-                                    <PostCard key={el.id} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
-                                    </PostCard>
-                                )
+                                posts.map((el, i) =>{
+                                    if(!el.re_post_id){
+                                        return (
+                                        <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                                        </PostCard> )
+                                    }else{
+                                        return (
+                                            <RePostCard key={i} post={el} />
+                                        )
+                                    }
+                                    
+                                    
+                                    
+                                })
                         }
+
+                            
                     </ul>
                     <TrendingCard postsAreChanged={postsAreChanged} />
                 </Section>

@@ -4,6 +4,7 @@ import { AuthContext } from "../context/auth.js";
 import apiPosts from "../services/apiPosts.js";
 import useInterval from "use-interval";
 import apiFollow from "../services/apiFollow";
+import RePostCard from "../components/RePostCard/RePostCard";
 
 export default function HomePage() {
     const [posts, setPosts] = useState(undefined);
@@ -16,8 +17,9 @@ export default function HomePage() {
     useEffect(() => {
         async function getData() {
             try {
-                const data = await apiPosts.getPosts(userAuth.token);
+                const data = await apiPosts.getPostsAndRePosts(userAuth.token);
                 setPosts(data);
+                console.log(data)
                 setDateOfLastUpdate(Date.now());
             } catch {
                 alert('An error occured while trying to fetch the posts, please refresh the page');
@@ -58,6 +60,7 @@ export default function HomePage() {
     }
 
     return (
+        <>
         <PostsMainSection 
             title={'timeline'} 
             posts={!posts ? 'carregando' : posts} 
@@ -68,5 +71,9 @@ export default function HomePage() {
             isFollowingOne={isFollowingOne}
         >
         </PostsMainSection>
+
+        
+        
+        </> 
     )
 }
