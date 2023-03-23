@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
 import RepeatIcon from "../RepeatIcon/RepeatIcon";
 
-export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) {
+export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost}) {
     const { id, post_author_id, post_author, photo_author,
         post_description, post_link, liked_by, user_liked,
         likes_count, post_link_title, post_link_description, post_link_image } = post;
@@ -111,7 +111,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged }) 
                     style={{ backgroundColor: "rgba(255,255,255,0.9)", color: "#505050" }}
                 />
                 
-                <RepeatIcon idPost={id}/>
+                <RepeatIcon idPost={id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}/>
                 </ReactionContainer>
             </LeftContainer>
             <RightContainer>

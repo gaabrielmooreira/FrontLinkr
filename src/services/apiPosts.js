@@ -48,6 +48,11 @@ async function getRePostCount(idPost){
     return await axios.get(`${process.env.REACT_APP_API_URL}/re-post/${idPost}`)
 }
 
+async function getPostsAndRePosts(token){
+    const { data: res } = await axios.get(`${process.env.REACT_APP_API_URL}/post-reposts`, createConfig(token))
+    return res
+}
+
 const apiPosts = {
     getPostsByHashtag,
     deletePost,
@@ -58,6 +63,7 @@ const apiPosts = {
     insertPost,
     insertRePost,
     getRePostCount,
-    getPostsAfterDate
+    getPostsAfterDate,
+    getPostsAndRePosts
 }
 export default apiPosts;

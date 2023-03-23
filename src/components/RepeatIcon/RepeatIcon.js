@@ -4,7 +4,7 @@ import apiPosts from "../../services/apiPosts";
 import { Box, Icon,ModalContainer, ModalBox} from "./Styled";
 import { ColorRing } from 'react-loader-spinner'
 
-export default function RepeatIcon({idPost}) {
+export default function RepeatIcon({idPost, postsAreChanged, setPostsAreChanged}) {
     const [rePostcount, setRePostCount] = useState(0)
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [insertIsLoading, setInsertIsLoading] = useState(false);
@@ -19,6 +19,7 @@ export default function RepeatIcon({idPost}) {
             await apiPosts.insertRePost(idPost, userAuth.token)
             setInsertIsLoading(false);
             setModalIsOpen(false);
+            setPostsAreChanged(!postsAreChanged)
         } catch (error) {
             setInsertIsLoading(false);
             setModalIsOpen(false);
