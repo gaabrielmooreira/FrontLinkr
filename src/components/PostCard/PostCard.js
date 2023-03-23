@@ -10,6 +10,7 @@ import { ReactTagify } from "react-tagify";
 import RepeatIcon from "../RepeatIcon/RepeatIcon";
 import CommentIcon from "../CommentIcon/CommentIcon";
 import CommentsBox from "../CommentsBox/CommentsBox";
+import RePostBox from "../RePostBox/RePostBox";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost}) {
     const { post_id, post_author_id, post_author, photo_author,
@@ -103,6 +104,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
 
     return (
         <ContainerGlobal>
+            <RePostBox re_posted_by={post.re_posted_by} isRePost={isRePost}/>
         <Post data-test="post">
             <LeftContainer>
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
