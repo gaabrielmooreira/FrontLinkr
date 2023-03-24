@@ -160,7 +160,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                     <div>
                         <h2>{post_link_title}</h2>
                         <p>{post_link_description}</p>
-                        <p>{post_link.length > 45 ? `${post_link.substring(0, 45)}...` : `${post_link}`}</p>
+                        <p>{(post_link) && post_link.length > 45 ? `${post_link.substring(0, 45)}...` : `${post_link}`}</p>
                     </div>
                     <img src={post_link_image} alt={post_link_title} />
                 </LinkContainer>
