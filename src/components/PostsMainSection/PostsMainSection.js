@@ -7,6 +7,7 @@ import PostCard from "../PostCard/PostCard.js";
 import InsertPost from "../InsertPost/insertPost.js";
 import { BiRefresh } from "react-icons/bi"
 import InfiniteScroll from 'react-infinite-scroller';
+import { useState } from "react";
 
 
 
@@ -14,9 +15,22 @@ import InfiniteScroll from 'react-infinite-scroller';
 export default function PostsMainSection({ title, posts, postsAreChanged, 
     setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, 
     isFollowed, isFollowingOne, user_photo, 
-    getMorePosts,hasMorePosts
+    //getMorePosts,hasMorePosts,
+    visiblePosts, setVisiblePosts
 }) {
       
+    const [hasMorePosts, setHasMorePosts] = useState(true);
+    const [startIndex, setStartIndex] = useState(0);
+
+    function getMorePosts() {
+        if (posts.length - startIndex <= 0){
+            setHasMorePosts(false);
+        } else{
+          let novo = posts.slice(0, startIndex + 10);
+            setVisiblePosts(novo);
+            setStartIndex(novo.length);
+        }
+    }
    
    
    
@@ -65,7 +79,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged,
                                 hasMore={hasMorePosts}
                                 loader={<Teste>Carregando...</Teste>}
                                 >
-                                {posts.map((el, i) =>{
+                                {visiblePosts.map((el, i) =>{
                                     if(!el.re_post_id){
                                         return (
                                         <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>

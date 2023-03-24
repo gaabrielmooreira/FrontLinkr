@@ -13,10 +13,10 @@ export default function HomePage() {
     const [dateOfLastUpdate, setDateOfLastUpdate] = useState('');
     const [isFollowingOne, setIsFollowingOne] = useState();
 
-    const [hasMorePosts, setHasMorePosts] = useState(true);
-    const [startIndex, setStartIndex] = useState(0);
+    //const [hasMorePosts, setHasMorePosts] = useState(true);
+    //const [startIndex, setStartIndex] = useState(0);
     const [visiblePosts, setVisiblePosts] = useState(undefined)
-   
+    
    
     
 
@@ -69,17 +69,17 @@ export default function HomePage() {
     }
 
   
-    function getMorePosts() {
-        if (posts.length - startIndex <= 0){
-            setHasMorePosts(false);
-        } else{
-          let novo = posts.slice(0, startIndex + 10);
-            setVisiblePosts(novo);
-            setStartIndex(novo.length);
-        }
-    }
+    // function getMorePosts() {
+    //     if (posts.length - startIndex <= 0){
+    //         setHasMorePosts(false);
+    //     } else{
+    //       let novo = posts.slice(0, startIndex + 10);
+    //         setVisiblePosts(novo);
+    //         setStartIndex(novo.length);
+    //     }
+    // }
 
-    console.log(visiblePosts)
+    //console.log(visiblePosts)
        
     
    
@@ -88,16 +88,16 @@ export default function HomePage() {
         <>
             <PostsMainSection
                 title={'timeline'}
-                posts={!visiblePosts ? 'carregando' : visiblePosts}
+                posts={!posts ? 'carregando' : posts}
                 postsAreChanged={postsAreChanged}
                 setPostsAreChanged={setPostsAreChanged}
                 newPostsAvailable={newPostsAvailable}
                 getNewPosts={getNewPosts}
                 isFollowingOne={isFollowingOne}
-                getMorePosts={getMorePosts}
-                hasMorePosts={hasMorePosts}
-                // visiblePosts={visiblePosts}
-                // setVisiblePosts={setVisiblePosts}
+                //getMorePosts={getMorePosts}
+                //hasMorePosts={hasMorePosts}
+                visiblePosts={visiblePosts}
+                setVisiblePosts={setVisiblePosts}
 
             >
             </PostsMainSection>

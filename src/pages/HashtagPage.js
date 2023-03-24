@@ -8,15 +8,28 @@ export default function HashtagPage() {
     const { hashtag } = useParams()
     const [posts, setPosts] = useState(undefined)
     const { userAuth } = useContext(AuthContext)
+    const [visiblePosts, setVisiblePosts] = useState(undefined)
+
     useEffect(() => {
         try {
             const data = apiPosts.getPostsByHashtag(hashtag, userAuth.token)
-            data.then((res) => setPosts(res))
+            data.then((res) => {setPosts(res)
+                const visiblePosts = res.slice(0,10)
+                setVisiblePosts(visiblePosts);}
+            )
         } catch (error) {
             console.log(error.message)
         }
     }, [hashtag,userAuth.token])
+
+    //console.log(visiblePosts)
+
     return (
-        <PostsMainSection title={'# ' + hashtag} posts={!posts? 'carregando' : posts}/>
+        <PostsMainSection title={'# ' + hashtag} 
+        posts={!posts? 'carregando' : posts}
+        visiblePosts={visiblePosts}
+        setVisiblePosts={setVisiblePosts}
+        
+        />
     )
 }

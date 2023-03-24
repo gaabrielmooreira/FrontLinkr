@@ -13,6 +13,7 @@ export default function UserPage() {
     const { userAuth } = useContext(AuthContext)
     const [user, setUser] = useState({name:"",photo_user:""})
     const [isFollowed, setIsFollowed] = useState(false)
+    const [visiblePosts, setVisiblePosts] = useState(undefined)
 
     useEffect(() => {
         try {
@@ -28,6 +29,8 @@ export default function UserPage() {
             const data = apiPosts.getPostsByUser(idUser, userAuth.token)
             data.then((res) => {
                 setPosts(res)
+                const visiblePosts = res.slice(0,10)
+                setVisiblePosts(visiblePosts)
             })
         } catch (error) {
             console.log(error.message)
@@ -63,6 +66,9 @@ export default function UserPage() {
         }
     }
 
+    //console.log(visiblePosts)
+
+
     return (
         <PostsMainSection
             toggleFollow={Number(idUser) !== userAuth.id && toggleFollow}
@@ -70,6 +76,8 @@ export default function UserPage() {
             title={`${user.name}’s posts`}
             user_photo={user.photo_user}
             posts={!posts ? 'carregando' : posts}
+            visiblePosts={visiblePosts}
+                setVisiblePosts={setVisiblePosts}
         />
     )
 }
