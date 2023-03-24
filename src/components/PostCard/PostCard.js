@@ -159,7 +159,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                 </LinkContainer>
             </RightContainer>
         </Post>
-        <CommentsBox showComments={showComments} setNumber={setNumberComments} photo={photo_author}/>
+        <CommentsBox post={post_id} showComments={showComments} setNumber={setNumberComments} photo={photo_author}/>
         </ContainerGlobal>
     )
 }
