@@ -14,9 +14,9 @@ export default function CommentsBox({showComments, setNumber, photo}) {
 
     useEffect(() => {
         try {
-            const commentsArray = apiComments.getAllComments(userAuth.token);
-            setAllComments([...commentsArray]);
-            setNumber(commentsArray.length);
+            //const commentsArray = apiComments.getAllComments(userAuth.token);
+            //setAllComments([...commentsArray]);
+            //setNumber(commentsArray.length);
         
         } catch (error) {
             // alert(error.message);
@@ -29,7 +29,7 @@ export default function CommentsBox({showComments, setNumber, photo}) {
         }
        
         try {
-            await apiComments.insertComment({comment: inputText}, userAuth.token );
+            //await apiComments.insertComment({comment: inputText}, userAuth.token );
             setInputText("");
         } catch (error) {
             alert(error.message);

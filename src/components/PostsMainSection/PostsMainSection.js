@@ -6,11 +6,20 @@ import { Post } from "../PostCard/Styled.js";
 import PostCard from "../PostCard/PostCard.js";
 import InsertPost from "../InsertPost/insertPost.js";
 import { BiRefresh } from "react-icons/bi"
-import RePostCard from "../RePostBox/RePostBox.js";
+import InfiniteScroll from 'react-infinite-scroller';
 
 
 
-export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, isFollowed, isFollowingOne, user_photo }) {
+
+export default function PostsMainSection({ title, posts, postsAreChanged, 
+    setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, 
+    isFollowed, isFollowingOne, user_photo, 
+    getMorePosts,hasMorePosts
+}) {
+      
+   
+   
+   
     return (
         <BaseScreen>
             <Header withSearch={true}></Header>
@@ -29,8 +38,8 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                         {isFollowed === "waiting" ? ". . ." : isFollowed ? "Unfollow" : "Follow"}
                     </button>}
                 </TitleConteiner>
-                <Section>
-                    <ul>
+                <Section >
+                    <ul id="posts-container">
                         {title === "timeline" && <InsertPost postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />}
                         {(newPostsAvailable > 0) &&
                             <ButtonNewPosts data-test="load-btn" onClick={() => getNewPosts()}>
@@ -50,7 +59,13 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                     }
                                 </NotFoundContainer>
                                 :
-                                posts.map((el, i) =>{
+                                <InfiniteScroll
+                                pageStart={0}
+                                loadMore={getMorePosts}
+                                hasMore={hasMorePosts}
+                                loader={<Teste>Carregando...</Teste>}
+                                >
+                                {posts.map((el, i) =>{
                                     if(!el.re_post_id){
                                         return (
                                         <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
@@ -63,7 +78,8 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                     
                                     
                                     
-                                })
+                                })}
+                                </InfiniteScroll>
                         }
 
                             
@@ -158,4 +174,9 @@ const NotFoundContainer = styled.p`
     font-size: 27px;
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+`
+const Teste = styled.h1`
+    font-size: 50px;
+    color: #FFFFFF;
+
 `
