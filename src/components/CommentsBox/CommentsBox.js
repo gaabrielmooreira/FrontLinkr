@@ -20,7 +20,7 @@ export default function CommentsBox({ post, showComments, setNumber, photo }) {
             setNumber(commentsArray.length);
 
         } catch (error) {
-            alert(error.message);
+            // alert(error.message);
         }
     }
     useEffect(() => {

@@ -45,8 +45,8 @@ export default function RepeatIcon({idPost, postsAreChanged, setPostsAreChanged}
   return (
     <>
     <Box>
-      <Icon onClick={handleOpenModal}/>
-      <p>{`${rePostcount} re-post`}</p>
+      <Icon onClick={handleOpenModal} data-test="repost-btn"/>
+      <p data-test="repost-counter">{`${rePostcount} re-post`}</p>
     </Box>
     {modalIsOpen &&
                 <ModalContainer>

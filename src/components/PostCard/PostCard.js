@@ -10,6 +10,7 @@ import { ReactTagify } from "react-tagify";
 import RepeatIcon from "../RepeatIcon/RepeatIcon";
 import CommentIcon from "../CommentIcon/CommentIcon";
 import CommentsBox from "../CommentsBox/CommentsBox";
+import RePostBox from "../RePostBox/RePostBox";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost}) {
     const { post_id, post_author_id, post_author, photo_author,
@@ -103,6 +104,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
 
     return (
         <ContainerGlobal>
+            <RePostBox re_posted_by={post.re_posted_by} isRePost={isRePost}/>
         <Post data-test="post">
             <LeftContainer>
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
@@ -124,10 +126,15 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                 <RightTopContainer>
                     <h2 data-test="username" onClick={goToUserPage}>{post_author}</h2>
                     {
-                        (post_author_id === userAuth.id) &&
+                        (post_author_id === userAuth.id && !isRePost) &&
                         <div>
-                            <EditIcon onClick={() => isEditing ? cancelEdit() : openEdit()} color='#FFF' size='20px' data-test="edit-btn" />
-                            <DeleteButton idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />
+                            <EditIcon 
+                                onClick={() => isEditing ? cancelEdit() : openEdit()} 
+                                color='#FFF' 
+                                size='20px' 
+                                data-test="edit-btn" 
+                            />
+                            <DeleteButton idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}/>
                         </div>
                     }
                 </RightTopContainer>
@@ -153,7 +160,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                     <div>
                         <h2>{post_link_title}</h2>
                         <p>{post_link_description}</p>
-                        <p>{post_link.length > 45 ? `${post_link.substring(0, 45)}...` : `${post_link}`}</p>
+                        <p>{(post_link) && post_link.length > 45 ? `${post_link.substring(0, 45)}...` : `${post_link}`}</p>
                     </div>
                     <img src={post_link_image} alt={post_link_title} />
                 </LinkContainer>
