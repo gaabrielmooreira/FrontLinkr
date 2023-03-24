@@ -2,8 +2,8 @@ import axios from "axios";
 import { createConfig } from "./apiAuth";
 
 async function insertComment(post, comment, token){
-    const {id} = await axios.post(`${process.env.REACT_APP_API_URL}/create-comment`, {idPost: post, comment}, createConfig(token));
-    return id; 
+    const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/create-comment`, {idPost: post, comment}, createConfig(token));
+    return data;
 }
 
 async function getAllComments(post, token){

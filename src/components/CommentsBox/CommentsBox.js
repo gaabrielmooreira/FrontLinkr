@@ -13,19 +13,23 @@ export default function CommentsBox({ post, showComments, setNumber, photo }) {
     const [allComments, setAllComments] = useState([]);
     const [reload, setReload] = useState(0);
 
-    useEffect(() => {
-        async function loadComments() {
-            try {
-                const commentsArray = await apiComments.getAllComments(post, userAuth.token);
-                setAllComments([...commentsArray]);
-                setNumber(commentsArray.length);
+    async function loadComments() {
+        try {
+            const commentsArray = await apiComments.getAllComments(post, userAuth.token);
+            setAllComments([...commentsArray]);
+            setNumber(commentsArray.length);
 
-            } catch (error) {
-                alert(error.message);
-            }
+        } catch (error) {
+            alert(error.message);
         }
+    }
+    useEffect(() => {
         loadComments();
     }, [reload]);
+
+    setInterval(() =>{
+        loadComments();
+    }, 30000);
 
     async function sendComment() {
         if (!inputText.length) {
@@ -33,8 +37,7 @@ export default function CommentsBox({ post, showComments, setNumber, photo }) {
         }
         try {
             const newId = await apiComments.insertComment(post, inputText, userAuth.token);
-            console.log(newId)
-            setReload(newId);
+            setReload(newId.id);
             setInputText("");
         } catch (error) {
             alert(error.message);
