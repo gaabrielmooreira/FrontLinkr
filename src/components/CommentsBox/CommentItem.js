@@ -7,7 +7,7 @@ export default function CommentItem({ item }) {
 
     
     return (
-        <CommentContainer>
+        <CommentContainer data-test="comment">
             <Picture src={item.photo} />
             <div>
                 <div>

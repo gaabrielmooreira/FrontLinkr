@@ -6,7 +6,7 @@ import CommentItem from "./CommentItem";
 import apiComments from "../../services/apiComments";
 
 
-export default function CommentsBox({ post, showComments, setNumber, photo }) {
+export default function CommentsBox({ post, showComments, setNumber}) {
     const { userAuth } = useContext(AuthContext);
 
     const [inputText, setInputText] = useState("");
@@ -46,14 +46,14 @@ export default function CommentsBox({ post, showComments, setNumber, photo }) {
     }
 
     return (
-        <Container showComments={showComments}>
+        <Container showComments={showComments} data-test="comment-box">
             <ShowCommentsBox >
                 {allComments.length !== 0 ? allComments.map((item) => <CommentItem  item={item} />) : ""}
             </ShowCommentsBox>
             <MakeComment>
-                <img src={photo} />
-                <input type="text" placeholder="write a comment..." value={inputText} onChange={(event) => setInputText(event.target.value)} />
-                <SendIcon onClick={sendComment} />
+                <img src={userAuth.url} />
+                <input data-test="comment-input" type="text" placeholder="write a comment..." value={inputText} onChange={(event) => setInputText(event.target.value)} />
+                <SendIcon onClick={sendComment} data-test="comment-submit"/>
             </MakeComment>
         </Container>
     )
