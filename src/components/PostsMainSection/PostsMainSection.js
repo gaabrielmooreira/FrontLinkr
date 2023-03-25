@@ -46,6 +46,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged,
                         <h1 data-test="hashtag-title">{title}</h1>
                     </div>
                     {toggleFollow && <button
+                        data-test="follow-btn"
                         onClick={() => toggleFollow()}
                         disabled={isFollowed === "waiting"}
                     >

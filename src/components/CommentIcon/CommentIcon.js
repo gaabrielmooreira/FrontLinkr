@@ -10,8 +10,8 @@ export default function CommentIcon({number, showComments, setShowComments}) {
     }
     return (
         <IconDiv>
-            <Icon onClick={toggleDisplay} />
-            <p>{number} comments</p>
+            <Icon onClick={toggleDisplay} data-test="comment-btn" />
+            <p data-test="comment-counter">{`${number} comments`}</p>
         </IconDiv>
 
     )

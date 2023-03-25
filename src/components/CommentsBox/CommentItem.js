@@ -1,15 +1,20 @@
-import styled from "styled-components"
+import styled from "styled-components";
+
 export default function CommentItem({ item }) {
+
+    let relation = "";
+    if(item.id_comment_author === item.id_post_author)  relation ="• post’s author";
+
+    
     return (
-        <CommentContainer>
-            <Picture src={item.foto} />
+        <CommentContainer data-test="comment">
+            <Picture src={item.photo} />
             <div>
                 <div>
-                    <p>{item.nome} <span>{item.relation !== "" ? item.relation : ""}</span></p>
-                    
+                    <p>{item.name} <span>{relation}</span></p> 
                 </div>
 
-                <h1>{item.comment}</h1>
+                <h1>{item.comment_text}</h1>
             </div>
         </CommentContainer>
     )

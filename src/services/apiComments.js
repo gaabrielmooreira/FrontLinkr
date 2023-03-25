@@ -1,12 +1,13 @@
 import axios from "axios";
 import { createConfig } from "./apiAuth";
 
-async function insertComment(comment, token){
-return await axios.post(`${process.env.REACT_APP_API_URL}/create-comment`, comment, createConfig(token));
+async function insertComment(post, comment, token){
+    const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/create-comment`, {idPost: post, comment}, createConfig(token));
+    return data;
 }
 
-async function getAllComments(token){
-    const {data} = await axios.get(`${process.env.REACT_APP_API_URL}/get-all-comments`, createConfig(token))
+async function getAllComments(post, token){
+    const {data} = await axios.get(`${process.env.REACT_APP_API_URL}/get-comments/${post}`, createConfig(token));
     return data;
 }
 
