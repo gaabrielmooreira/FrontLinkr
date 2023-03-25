@@ -15,9 +15,11 @@ export default function CommentsBox({ post, showComments, setNumber}) {
 
     async function loadComments() {
         try {
+
             const commentsArray = await apiComments.getAllComments(post, userAuth.token);
             setAllComments([...commentsArray]);
             setNumber(commentsArray.length);
+
 
         } catch (error) {
             // alert(error.message);
@@ -36,8 +38,10 @@ export default function CommentsBox({ post, showComments, setNumber}) {
             return alert("Não é possível fazer comentários vazios");
         }
         try {
+
             const newId = await apiComments.insertComment(post, inputText, userAuth.token);
             setReload(newId.id);
+
             setInputText("");
         } catch (error) {
             alert(error.message);
