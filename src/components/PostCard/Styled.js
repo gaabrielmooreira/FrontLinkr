@@ -69,7 +69,8 @@ export const Heart = styled(FaHeart)`
     }
 `
 
-export const TooltipDiv = styled.div`
+export const TooltipContainer = styled.a`
+    text-decoration: none;
     width: 50px;
     text-align: center;
     margin-top: 5px;

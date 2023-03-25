@@ -1,8 +1,8 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/auth";
 import apiPosts from "../../services/apiPosts";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import { ContainerGlobal, EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, ReactionContainer, RightContainer, RightTopContainer, TooltipDiv } from "./Styled";
+import { ContainerGlobal, EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, ReactionContainer, RightContainer, RightTopContainer, TooltipContainer } from "./Styled";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { useNavigate } from "react-router-dom";
@@ -103,9 +103,9 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
                 <ReactionContainer>
                 {user_liked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent data-test="like-btn" onClick={handleLike} />}
-                <TooltipDiv data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} data-test="tooltip">
+                <TooltipContainer data-test="tooltip" data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} >
                     <p data-test="counter" >{likes_count > 1 ? `${likes_count} likes` : `${likes_count} like`}</p>
-                </TooltipDiv>
+                </TooltipContainer>
                 <Tooltip
                     id="my-tooltip"
                     place="bottom"
