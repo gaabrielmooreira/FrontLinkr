@@ -3,7 +3,13 @@ import styled from "styled-components";
 export default function CommentItem({ item }) {
 
     let relation = "";
-    if(item.id_comment_author === item.id_post_author)  relation ="• post’s author";
+    if(item.is_following == true) {
+        relation = "• following";
+    }
+    
+    if(item.is_author == true)  {
+        relation ="• post's author";
+    }
 
     
     return (
