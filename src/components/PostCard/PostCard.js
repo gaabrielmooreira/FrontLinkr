@@ -12,7 +12,7 @@ import CommentIcon from "../CommentIcon/CommentIcon";
 import CommentsBox from "../CommentsBox/CommentsBox";
 import RePostBox from "../RePostBox/RePostBox";
 
-export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost}) {
+export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost, deleteFromVisible, updatePostFromVisible}) {
     const { post_id, post_author_id, post_author, photo_author,
         post_description, post_link, liked_by, user_liked,
         likes_count, post_link_title, post_link_description, post_link_image } = post;
@@ -23,10 +23,9 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
     const [likesPost, setLikesPost] = useState(Number(likes_count));
     const [likesDescription, setLikesDescription] = useState("");
 
-    const [description, setDescription] = useState(post_description);
     const [isEditing, setIsEditing] = useState(false);
     const [isConfirmingEdit, setIsConfirmingEdit] = useState(false);
-    const [descriptionInput, setDescriptionInput] = useState(description);
+    const [descriptionInput, setDescriptionInput] = useState("");
     const inputRef = useRef(null);
 
     const [numberComments, setNumberComments] = useState(0);
@@ -73,11 +72,12 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
     }, [isEditing]);
 
     const openEdit = () => {
+        setDescriptionInput(post_description)
         setIsEditing(true);
     }
 
     const cancelEdit = () => {
-        setDescriptionInput(description);
+        setDescriptionInput(post_description);
         setIsEditing(false);
     }
 
@@ -90,7 +90,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
             setIsConfirmingEdit(true);
             try {
                 await apiPosts.updatePost(post_id, descriptionInput, userAuth.token);
-                setDescription(descriptionInput);
+                updatePostFromVisible(post_id, descriptionInput);
                 setIsConfirmingEdit(false);
                 setIsEditing(false);
             } catch (error) {
@@ -134,7 +134,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                                 size='20px' 
                                 data-test="edit-btn" 
                             />
-                            <DeleteButton idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}/>
+                            <DeleteButton idPost={post_id} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} deleteFromVisible={deleteFromVisible}/>
                         </div>
                     }
                 </RightTopContainer>
@@ -152,7 +152,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                     <ReactTagify colors={"white"}
                         tagClicked={(tag) => navigate(`/hashtag/${tag.slice(1)}`)}>
 
-                        <PostText data-test="description">{description ? description : ""}</PostText>
+                        <PostText data-test="description">{post_description ? post_description : ""}</PostText>
 
                     </ReactTagify>
                 }

@@ -31,8 +31,19 @@ export default function PostsMainSection({ title, posts, postsAreChanged,
             setStartIndex(novo.length);
         }
     }
+    
+    const deleteFromVisible = (post_id) => {
+        const postsChanged = [...visiblePosts.filter((e) => e.post_id != post_id)];
+        setVisiblePosts(postsChanged);
+    }
    
-   
+    const updatePostFromVisible = (post_id, newDescription) => {
+        const postsChanged = [...visiblePosts.map((item) =>{
+            if(item.post_id === post_id) return {...item, post_description: newDescription}
+            else return item;
+        })]
+        setVisiblePosts(postsChanged);
+    }
    
     return (
         <BaseScreen>
@@ -83,7 +94,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged,
                                 {visiblePosts.map((el, i) =>{
                                     if(!el.re_post_id){
                                         return (
-                                        <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                                        <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} deleteFromVisible={deleteFromVisible} updatePostFromVisible={updatePostFromVisible}>
                                         </PostCard> )
                                     }else{
                                         return (

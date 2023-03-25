@@ -59,8 +59,8 @@ export default function HomePage() {
     const getNewPosts = async () => {
         try {
             const data = await apiPosts.getPostsAndRepostsAfterDate(dateOfLastUpdate, userAuth.token);
-            const arrNewPosts = [...data, ...posts];
-            setPosts(arrNewPosts);
+            const arrNewPosts = [...data, ...visiblePosts];
+            setVisiblePosts(arrNewPosts);
             setDateOfLastUpdate(Date.now());
             setNewPostsAvailable(0);
         } catch (err) {
