@@ -13,7 +13,8 @@ export default function CommentsBox({ post, showComments, setNumber}) {
     const [allComments, setAllComments] = useState([]);
     const [reload, setReload] = useState(0);
 
-    async function loadComments() {
+    useEffect(() => {
+        async function loadComments() {
         try {
 
             const commentsArray = await apiComments.getAllComments(post, userAuth.token);
@@ -22,17 +23,15 @@ export default function CommentsBox({ post, showComments, setNumber}) {
 
 
         } catch (error) {
-            // alert(error.message);
+            console.log(error.message);
         }
     }
-    useEffect(() => {
-        loadComments();
-    }, [reload]);
 
-    setInterval(() =>{
-        loadComments();
-    }, 30000);
 
+        loadComments();
+    }, [reload, post]);
+
+   
     async function sendComment() {
         if (!inputText.length) {
             return alert("Não é possível fazer comentários vazios");
