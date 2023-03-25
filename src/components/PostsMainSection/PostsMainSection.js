@@ -94,11 +94,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged,
                                 {visiblePosts.map((el, i) =>{
                                     if(!el.re_post_id){
                                         return (
-<<<<<<< HEAD
-                                        <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} >
-=======
                                         <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} deleteFromVisible={deleteFromVisible} updatePostFromVisible={updatePostFromVisible}>
->>>>>>> main
                                         </PostCard> )
                                     }else{
                                         return (
