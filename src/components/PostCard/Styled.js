@@ -69,6 +69,20 @@ export const Heart = styled(FaHeart)`
     }
 `
 
+export const TooltipDiv = styled.div`
+    width: 50px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    p {
+        margin-bottom: 0px;
+    }
+`
+
 export const RightContainer = styled.div`
     display: flex;
     flex-direction: column;

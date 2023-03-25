@@ -33,18 +33,38 @@ export default function PostsMainSection({ title, posts, postsAreChanged,
     }
     
     const deleteFromVisible = (post_id) => {
+
         const postsChanged = [...visiblePosts.filter((e) => e.post_id != post_id)];
         setVisiblePosts(postsChanged);
+
     }
    
     const updatePostFromVisible = (post_id, newDescription) => {
+
         const postsChanged = [...visiblePosts.map((item) =>{
             if(item.post_id === post_id) return {...item, post_description: newDescription}
             else return item;
         })]
         setVisiblePosts(postsChanged);
+
     }
-   
+    
+    const updateLikeFromVisible = (post_id, user_liked, likes_count) => {
+        
+        const postsChanged = [...visiblePosts.map((item) => {
+            if(item.post_id === post_id && user_liked === true){
+                const newLikes = Number(likes_count) - 1;
+                return {...item, user_liked: false, likes_count: newLikes}
+            } else if (item.post_id === post_id && user_liked === false){
+                const newLikes = Number(likes_count) + 1;
+                return {...item, user_liked: true, likes_count: newLikes}
+            }
+            return item;
+        })]
+        setVisiblePosts(postsChanged); 
+        
+    }
+
     return (
         <BaseScreen>
             <Header withSearch={true}></Header>
@@ -94,7 +114,15 @@ export default function PostsMainSection({ title, posts, postsAreChanged,
                                 {visiblePosts.map((el, i) =>{
                                     if(!el.re_post_id){
                                         return (
-                                        <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} deleteFromVisible={deleteFromVisible} updatePostFromVisible={updatePostFromVisible}>
+                                        <PostCard 
+                                            key={i} 
+                                            post={el} 
+                                            postsAreChanged={postsAreChanged} 
+                                            setPostsAreChanged={setPostsAreChanged} 
+                                            deleteFromVisible={deleteFromVisible} 
+                                            updatePostFromVisible={updatePostFromVisible}
+                                            updateLikeFromVisible={updateLikeFromVisible}
+                                            >
                                         </PostCard> )
                                     }else{
                                         return (

@@ -1,8 +1,8 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { AuthContext } from "../../context/auth";
 import apiPosts from "../../services/apiPosts";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import { ContainerGlobal, EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, ReactionContainer, RightContainer, RightTopContainer } from "./Styled";
+import { ContainerGlobal, EditIcon, Heart, HeartTransparent, LeftContainer, LinkContainer, Post, PostText, ReactionContainer, RightContainer, RightTopContainer, TooltipDiv } from "./Styled";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { useNavigate } from "react-router-dom";
@@ -12,16 +12,15 @@ import CommentIcon from "../CommentIcon/CommentIcon";
 import CommentsBox from "../CommentsBox/CommentsBox";
 import RePostBox from "../RePostBox/RePostBox";
 
-export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost, deleteFromVisible, updatePostFromVisible}) {
+export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost, deleteFromVisible, updatePostFromVisible, updateLikeFromVisible}) {
     const { post_id, post_author_id, post_author, photo_author,
         post_description, post_link, liked_by, user_liked,
         likes_count, post_link_title, post_link_description, post_link_image } = post;
         
     const { userAuth } = useContext(AuthContext);
 
-    const [isLiked, setIsLiked] = useState(user_liked);
-    const [likesPost, setLikesPost] = useState(Number(likes_count));
     const [likesDescription, setLikesDescription] = useState("");
+    const [likesChanged, setLikesChanged] = useState(false);
 
     const [isEditing, setIsEditing] = useState(false);
     const [isConfirmingEdit, setIsConfirmingEdit] = useState(false);
@@ -36,14 +35,8 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
     const handleLike = async () => {
         try {
             await apiPosts.toggleLike(post_id, userAuth.token);
-            if (isLiked) {
-                const newLikesPost = Number(likesPost) - 1;
-                setLikesPost(newLikesPost);
-            } else {
-                const newLikesPost = Number(likesPost) + 1;
-                setLikesPost(newLikesPost);
-            }
-            setIsLiked(!isLiked);
+            updateLikeFromVisible(post_id,user_liked,likes_count);
+            setLikesChanged(!likesChanged)
         } catch (error) {
             console.log(error);
         }
@@ -52,19 +45,19 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
 
     useEffect(() => {
         function toolTipDescription() {
-            if (!likesPost) return setLikesDescription("");
-            if (!isLiked) {
-                if (liked_by && likesPost === 1) return setLikesDescription(`${liked_by[0]}`);
-                if (liked_by && likesPost === 2) return setLikesDescription(`${liked_by[0]} e ${liked_by[1]}`);
-                if (liked_by && likesPost > 2) return setLikesDescription(`${liked_by[0]}, ${liked_by[1]} e outras ${likesPost - 2} pessoas`);
+            if (!Number(likes_count)) return setLikesDescription("");
+            if (!user_liked) {
+                if (liked_by && Number(likes_count) === 1) return setLikesDescription(`${liked_by[0]}`);
+                if (liked_by && Number(likes_count) === 2) return setLikesDescription(`${liked_by[0]} e ${liked_by[1]}`);
+                if (liked_by && Number(likes_count) > 2) return setLikesDescription(`${liked_by[0]}, ${liked_by[1]} e outras ${Number(likes_count) - 2} pessoas`);
             } else {
-                if (liked_by === null) return setLikesDescription(`Você`);
-                if (liked_by.length === 1) return setLikesDescription(`Você e ${liked_by[0]}`);
-                if (liked_by.length > 1) return setLikesDescription(`Você, ${liked_by[0]} e outras ${likesPost - 2} pessoas`);
+                if (Number(likes_count) === 1) return setLikesDescription(`Você`);
+                if (Number(likes_count) === 2) return setLikesDescription(`Você e ${liked_by[0]}`);
+                if (Number(likes_count) > 2) return setLikesDescription(`Você, ${liked_by[0]} e outras ${Number(likes_count) - 2} pessoas`);
             }
         }
         toolTipDescription();
-    }, [isLiked]);
+    }, [likesChanged]);
 
     // Edit 
     useEffect(() => {
@@ -109,10 +102,10 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
             <LeftContainer>
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
                 <ReactionContainer>
-                {isLiked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent data-test="like-btn" onClick={handleLike} />}
-                <div data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} data-test="tooltip">
-                    <p data-test="counter" >{likesPost > 1 ? `${likesPost} likes` : `${likesPost} like`}</p>
-                </div>
+                {user_liked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent data-test="like-btn" onClick={handleLike} />}
+                <TooltipDiv data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} data-test="tooltip">
+                    <p data-test="counter" >{likes_count > 1 ? `${likes_count} likes` : `${likes_count} like`}</p>
+                </TooltipDiv>
                 <Tooltip
                     id="my-tooltip"
                     place="bottom"
@@ -158,7 +151,7 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                 }
                 <LinkContainer href={post_link} data-test="link" target="_blank">
                     <div>
-                        <h2>{post_link_title}</h2>
+                        <h2>{(post_link_title) && post_link_title > 45 ? `${post_link_title.substring(0, 45)}...`: `${post_link_title}`}</h2>
                         <p>{post_link_description}</p>
                         <p>{(post_link) && post_link.length > 45 ? `${post_link.substring(0, 45)}...` : `${post_link}`}</p>
                     </div>
