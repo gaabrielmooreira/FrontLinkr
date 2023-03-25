@@ -6,11 +6,44 @@ import { Post } from "../PostCard/Styled.js";
 import PostCard from "../PostCard/PostCard.js";
 import InsertPost from "../InsertPost/insertPost.js";
 import { BiRefresh } from "react-icons/bi"
-import RePostCard from "../RePostBox/RePostBox.js";
+import InfiniteScroll from 'react-infinite-scroller';
+import { useState } from "react";
 
 
 
-export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, isFollowed, isFollowingOne, user_photo}) {
+
+export default function PostsMainSection({ title, posts, postsAreChanged, 
+    setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, 
+    isFollowed, isFollowingOne, user_photo, 
+    //getMorePosts,hasMorePosts,
+    visiblePosts, setVisiblePosts
+}) {
+      
+    const [hasMorePosts, setHasMorePosts] = useState(true);
+    const [startIndex, setStartIndex] = useState(0);
+
+    function getMorePosts() {
+        if (posts.length - startIndex <= 0){
+            setHasMorePosts(false);
+        } else{
+          let novo = posts.slice(0, startIndex + 10);
+            setVisiblePosts(novo);
+            setStartIndex(novo.length);
+        }
+    }
+    
+    const deleteFromVisible = (post_id) => {
+        const postsChanged = [...visiblePosts.filter((e) => e.post_id != post_id)];
+        setVisiblePosts(postsChanged);
+    }
+   
+    const updatePostFromVisible = (post_id, newDescription) => {
+        const postsChanged = [...visiblePosts.map((item) =>{
+            if(item.post_id === post_id) return {...item, post_description: newDescription}
+            else return item;
+        })]
+        setVisiblePosts(postsChanged);
+    }
    
     return (
         <BaseScreen>
@@ -31,8 +64,8 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                         {isFollowed === "waiting" ? ". . ." : isFollowed ? "Unfollow" : "Follow"}
                     </button>}
                 </TitleConteiner>
-                <Section>
-                    <ul>
+                <Section >
+                    <ul id="posts-container">
                         {title === "timeline" && <InsertPost postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} />}
                         {(newPostsAvailable > 0) &&
                             <ButtonNewPosts data-test="load-btn" onClick={() => getNewPosts()}>
@@ -52,10 +85,20 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                     }
                                 </NotFoundContainer>
                                 :
-                                posts.map((el, i) =>{
+                                <InfiniteScroll
+                                pageStart={0}
+                                loadMore={getMorePosts}
+                                hasMore={hasMorePosts}
+                                loader={<Teste>Carregando...</Teste>}
+                                >
+                                {visiblePosts.map((el, i) =>{
                                     if(!el.re_post_id){
                                         return (
+<<<<<<< HEAD
                                         <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} >
+=======
+                                        <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} deleteFromVisible={deleteFromVisible} updatePostFromVisible={updatePostFromVisible}>
+>>>>>>> main
                                         </PostCard> )
                                     }else{
                                         return (
@@ -65,7 +108,8 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                     
                                     
                                     
-                                })
+                                })}
+                                </InfiniteScroll>
                         }
 
                             
@@ -160,4 +204,9 @@ const NotFoundContainer = styled.p`
     font-size: 27px;
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+`
+const Teste = styled.h1`
+    font-size: 50px;
+    color: #FFFFFF;
+
 `

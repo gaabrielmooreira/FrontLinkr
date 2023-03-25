@@ -13,6 +13,11 @@ export default function HomePage() {
     const [dateOfLastUpdate, setDateOfLastUpdate] = useState('');
     const [isFollowingOne, setIsFollowingOne] = useState();
 
+    //const [hasMorePosts, setHasMorePosts] = useState(true);
+    //const [startIndex, setStartIndex] = useState(0);
+    const [visiblePosts, setVisiblePosts] = useState(undefined)
+    
+   
     
 
     useEffect(() => {
@@ -20,11 +25,14 @@ export default function HomePage() {
             try {
                 const data = await apiPosts.getPostsAndRePosts(userAuth.token);
                 setPosts(data);
-                console.log(data)
+                const visiblePosts = data.slice(0,10)
+                setVisiblePosts(visiblePosts);
                 setDateOfLastUpdate(Date.now());
+                
+                
             } catch {
                 alert('An error occured while trying to fetch the posts, please refresh the page');
-            }
+            } 
         }
         async function getFollowingOne() {
             try {
@@ -51,14 +59,30 @@ export default function HomePage() {
     const getNewPosts = async () => {
         try {
             const data = await apiPosts.getPostsAndRepostsAfterDate(dateOfLastUpdate, userAuth.token);
-            const arrNewPosts = [...data, ...posts];
-            setPosts(arrNewPosts);
+            const arrNewPosts = [...data, ...visiblePosts];
+            setVisiblePosts(arrNewPosts);
             setDateOfLastUpdate(Date.now());
             setNewPostsAvailable(0);
         } catch (err) {
             console.log(err);
         }
     }
+
+  
+    // function getMorePosts() {
+    //     if (posts.length - startIndex <= 0){
+    //         setHasMorePosts(false);
+    //     } else{
+    //       let novo = posts.slice(0, startIndex + 10);
+    //         setVisiblePosts(novo);
+    //         setStartIndex(novo.length);
+    //     }
+    // }
+
+    //console.log(visiblePosts)
+       
+    
+   
 
     return (
         <>
@@ -70,7 +94,11 @@ export default function HomePage() {
                 newPostsAvailable={newPostsAvailable}
                 getNewPosts={getNewPosts}
                 isFollowingOne={isFollowingOne}
-                
+                //getMorePosts={getMorePosts}
+                //hasMorePosts={hasMorePosts}
+                visiblePosts={visiblePosts}
+                setVisiblePosts={setVisiblePosts}
+
             >
             </PostsMainSection>
         </>
