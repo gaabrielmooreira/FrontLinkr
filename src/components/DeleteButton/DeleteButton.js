@@ -5,7 +5,7 @@ import apiPosts from "../../services/apiPosts";
 import { AuthContext } from "../../context/auth";
 
 
-export default function DeleteButton({ idPost, postsAreChanged, setPostsAreChanged }) {
+export default function DeleteButton({ idPost, postsAreChanged, setPostsAreChanged, deleteFromVisible }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [deleteIsLoading, setDeleteIsLoading] = useState(false);
     const { userAuth } = useContext(AuthContext);
@@ -19,7 +19,7 @@ export default function DeleteButton({ idPost, postsAreChanged, setPostsAreChang
             await apiPosts.deletePost(idPost, userAuth.token)
             setDeleteIsLoading(false);
             setModalIsOpen(false);
-            setPostsAreChanged(!postsAreChanged);
+            deleteFromVisible(idPost);
         } catch (error) {
             setDeleteIsLoading(false);
             setModalIsOpen(false);
