@@ -51,9 +51,9 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                 if (liked_by && Number(likes_count) === 2) return setLikesDescription(`${liked_by[0]} e ${liked_by[1]}`);
                 if (liked_by && Number(likes_count) > 2) return setLikesDescription(`${liked_by[0]}, ${liked_by[1]} e outras ${Number(likes_count) - 2} pessoas`);
             } else {
-                if (Number(likes_count) === 1) return setLikesDescription(`Você`);
-                if (Number(likes_count) === 2) return setLikesDescription(`Você e ${liked_by[0]}`);
-                if (Number(likes_count) > 2) return setLikesDescription(`Você, ${liked_by[0]} e outras ${Number(likes_count) - 2} pessoas`);
+                if (Number(likes_count) === 1) return setLikesDescription(`${userAuth.name}`);
+                if (Number(likes_count) === 2) return setLikesDescription(`${userAuth.name} e ${liked_by[0]}`);
+                if (Number(likes_count) > 2) return setLikesDescription(`${userAuth.name}, ${liked_by[0]} e outras ${Number(likes_count) - 2} pessoas`);
             }
         }
         toolTipDescription();
