@@ -13,6 +13,8 @@ export default function HomePage() {
     const [dateOfLastUpdate, setDateOfLastUpdate] = useState('');
     const [isFollowingOne, setIsFollowingOne] = useState();
 
+    
+
     useEffect(() => {
         async function getData() {
             try {
@@ -68,6 +70,7 @@ export default function HomePage() {
                 newPostsAvailable={newPostsAvailable}
                 getNewPosts={getNewPosts}
                 isFollowingOne={isFollowingOne}
+                
             >
             </PostsMainSection>
         </>

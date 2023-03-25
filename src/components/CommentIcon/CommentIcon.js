@@ -6,6 +6,7 @@ export default function CommentIcon({number, showComments, setShowComments}) {
     
     function toggleDisplay(){
         if(showComments === false) setShowComments(true)
+        
         else setShowComments(false)
     }
     return (

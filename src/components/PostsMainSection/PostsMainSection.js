@@ -10,7 +10,8 @@ import RePostCard from "../RePostBox/RePostBox.js";
 
 
 
-export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, isFollowed, isFollowingOne, user_photo }) {
+export default function PostsMainSection({ title, posts, postsAreChanged, setPostsAreChanged, newPostsAvailable, getNewPosts, toggleFollow, isFollowed, isFollowingOne, user_photo}) {
+   
     return (
         <BaseScreen>
             <Header withSearch={true}></Header>
@@ -54,7 +55,7 @@ export default function PostsMainSection({ title, posts, postsAreChanged, setPos
                                 posts.map((el, i) =>{
                                     if(!el.re_post_id){
                                         return (
-                                        <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged}>
+                                        <PostCard key={i} post={el} postsAreChanged={postsAreChanged} setPostsAreChanged={setPostsAreChanged} >
                                         </PostCard> )
                                     }else{
                                         return (

@@ -13,6 +13,7 @@ import CommentsBox from "../CommentsBox/CommentsBox";
 import RePostBox from "../RePostBox/RePostBox";
 
 export default function PostCard({ post, postsAreChanged, setPostsAreChanged, isRePost}) {
+   
     const { post_id, post_author_id, post_author, photo_author,
         post_description, post_link, liked_by, user_liked,
         likes_count, post_link_title, post_link_description, post_link_image } = post;
