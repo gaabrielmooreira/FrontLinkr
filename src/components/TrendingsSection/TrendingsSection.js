@@ -28,8 +28,8 @@ export default function TrendingCard({postsAreChanged}) {
                 </ul> :
                 <ul>
                     {hashtags.map((el, i) =>
-                        <HashtagItem key={i} data-test="hashtag">
-                            <Link to={`/hashtag/${el.name}`}>#{el.name}</Link>
+                        <HashtagItem key={i}>
+                            <Link data-test="hashtag" to={`/hashtag/${el.name}`}>#{el.name}</Link>
                         </HashtagItem>)}
                 </ul>
             }
@@ -39,7 +39,7 @@ export default function TrendingCard({postsAreChanged}) {
 
 const Container = styled.div`
     max-height:406px;
-    min-width: 301px;
+    min-width: 30%;
     div:nth-child(1) {
         background-color:${BLACK};
         border-radius: 16px 16px 0 0;
@@ -55,6 +55,9 @@ const Container = styled.div`
         font-size: 27px;
         line-height: 40px;  
     }
+    @media (max-width: 768px) {
+    display:none;
+ }
 
 `
 

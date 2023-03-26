@@ -5,7 +5,6 @@ import SignUpPage from "./pages/SignUpPage";
 import UserPage from "./pages/UserPage";
 import HashtagPage from "./pages/HashtagPage";
 import AuthProvider from "./context/auth";
-import Infinite from "./pages/infinite";
 
 export default function App() {
   return (
@@ -17,7 +16,6 @@ export default function App() {
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/hashtag/:hashtag" element={<HashtagPage />} />
           <Route path="/user/:idUser" element={<UserPage />} />
-          <Route path="/i" element={<Infinite />} />
       </Routes>
       </AuthProvider>
     </BrowserRouter>

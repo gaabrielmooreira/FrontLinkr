@@ -4,7 +4,10 @@ import { BiEditAlt } from 'react-icons/bi'
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 export const ContainerGlobal = styled.div`
- margin-bottom: 29px; 
+ margin-bottom: 29px;
+ @media (max-width: 768px) {
+    width:100%
+ }
  `
 
 export const Post = styled.li`
@@ -16,6 +19,9 @@ export const Post = styled.li`
     padding:20px;
     background-color: ${BLACK};
     position: relative;
+    @media (max-width: 768px) {
+    width:100%
+ }
 `
 
 export const LeftContainer = styled.div`
@@ -31,6 +37,9 @@ export const LeftContainer = styled.div`
         &:hover{
             cursor: pointer;
         }
+    }
+    @media (max-width: 768px) {
+        width:20%;
     }
    
 `
@@ -107,6 +116,9 @@ export const RightContainer = styled.div`
             outline: none;
         }
     }
+    @media (max-width: 768px) {
+        width:80%;
+    }
 `
 
 export const PostText = styled.p`
@@ -153,12 +165,18 @@ export const LinkContainer = styled.a`
         height: 154px;
         border-radius: 0px 13px 13px 0px;
     }
+    @media (max-width:768px) {
+    width:100%;
+  }
 `
 
 export const RightTopContainer = styled.div`
     display: flex;
     justify-content: space-between;
     width: 480px;
+    @media (max-width:768px) {
+    width:100%;
+  }
 `
 
 export const EditIcon = styled(BiEditAlt)`
