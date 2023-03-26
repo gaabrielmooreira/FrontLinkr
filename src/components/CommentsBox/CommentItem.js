@@ -61,4 +61,7 @@ h1{
     font-weight:400;
     
 }
+@media (max-width:768px) {
+    width:100%;
+  }
 `

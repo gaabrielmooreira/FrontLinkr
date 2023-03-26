@@ -10,6 +10,10 @@ export const Container = styled.div`
   padding: 20px 18px;
   display: flex;
   justify-content: space-evenly;
+  @media (max-width:768px) {
+    width:100%;
+    padding:20px 0;
+  }
 `;
 
 export const LeftContainer = styled.div`
@@ -20,6 +24,9 @@ export const LeftContainer = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
+  }
+  @media (max-width:768px) {
+    width:15%;
   }
 `;
 
@@ -37,6 +44,10 @@ export const RightContainer = styled.form`
     color: #707070;
     margin-bottom: 10px;
   }
+  @media (max-width:768px) {
+    width:85%;
+  }
+
 `;
 
 export const InputUrl = styled.input`
@@ -50,6 +61,9 @@ export const InputUrl = styled.input`
     background: #52b6ff;
     opacity: 0.7;
   }
+  @media (max-width:768px) {
+    width:85%;
+  }
 `;
 
 export const InputDescription = styled.input`
@@ -62,6 +76,9 @@ export const InputDescription = styled.input`
   input:disabled {
     background: #52b6ff;
     opacity: 0.7;
+  }
+  @media (max-width:768px) {
+    width:85%;
   }
 `;
 
@@ -85,5 +102,8 @@ export const Button = styled.div`
     background: #52b6ff;
     opacity: 0.7;
     border-radius: 5px;
+  }
+  @media (max-width:768px) {
+    width:85%;
   }
 `;

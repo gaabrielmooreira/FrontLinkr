@@ -147,6 +147,9 @@ export default function PostsMainSection({ title, posts, postsAreChanged,
 
 const Main = styled.div`
     width:calc(611px + 25px + 301px);
+    @media (max-width: 768px) {
+    width:100%;
+ }
     `
 const TitleConteiner = styled.div`
     display:flex;
@@ -220,6 +223,9 @@ const ButtonNewPosts = styled.button`
     &:hover{
         cursor: pointer;
     }
+    @media (max-width: 768px) {
+    width:100%;
+ }
 `
 
 const NotFoundContainer = styled.p`
@@ -228,6 +234,9 @@ const NotFoundContainer = styled.p`
     font-size: 27px;
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+    @media (max-width: 768px) {
+    width:100%;
+ }
 `
 const Teste = styled.h1`
     font-size: 50px;

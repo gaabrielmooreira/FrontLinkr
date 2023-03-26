@@ -16,23 +16,23 @@ export default function HomePage() {
     //const [hasMorePosts, setHasMorePosts] = useState(true);
     //const [startIndex, setStartIndex] = useState(0);
     const [visiblePosts, setVisiblePosts] = useState(undefined)
-    
-   
-    
+
+
+
 
     useEffect(() => {
         async function getData() {
             try {
                 const data = await apiPosts.getPostsAndRePosts(userAuth.token);
                 setPosts(data);
-                const visiblePosts = data.slice(0,10)
+                const visiblePosts = data.slice(0, 10)
                 setVisiblePosts(visiblePosts);
                 setDateOfLastUpdate(Date.now());
-                
-                
+
+
             } catch {
                 alert('An error occured while trying to fetch the posts, please refresh the page');
-            } 
+            }
         }
         async function getFollowingOne() {
             try {
@@ -68,7 +68,7 @@ export default function HomePage() {
         }
     }
 
-  
+
     // function getMorePosts() {
     //     if (posts.length - startIndex <= 0){
     //         setHasMorePosts(false);
@@ -80,27 +80,27 @@ export default function HomePage() {
     // }
 
     //console.log(visiblePosts)
-       
-    
-   
+
+
+
 
     return (
-        <>
-            <PostsMainSection
-                title={'timeline'}
-                posts={!posts ? 'carregando' : posts}
-                postsAreChanged={postsAreChanged}
-                setPostsAreChanged={setPostsAreChanged}
-                newPostsAvailable={newPostsAvailable}
-                getNewPosts={getNewPosts}
-                isFollowingOne={isFollowingOne}
-                //getMorePosts={getMorePosts}
-                //hasMorePosts={hasMorePosts}
-                visiblePosts={visiblePosts}
-                setVisiblePosts={setVisiblePosts}
 
-            >
-            </PostsMainSection>
-        </>
+        <PostsMainSection
+            title={'timeline'}
+            posts={!posts ? 'carregando' : posts}
+            postsAreChanged={postsAreChanged}
+            setPostsAreChanged={setPostsAreChanged}
+            newPostsAvailable={newPostsAvailable}
+            getNewPosts={getNewPosts}
+            isFollowingOne={isFollowingOne}
+            //getMorePosts={getMorePosts}
+            //hasMorePosts={hasMorePosts}
+            visiblePosts={visiblePosts}
+            setVisiblePosts={setVisiblePosts}
+
+        >
+        </PostsMainSection>
+
     )
 }
