@@ -14,7 +14,7 @@ export const HeaderContainer = styled.header`
     background-color: #151515;
     padding: 10px 17px 8px 28px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    z-index: 10;
+    z-index: 4;
 `
 export const StyledH1 = styled.h1`
     font-family: 'Passion One', cursive;

@@ -28,8 +28,8 @@ export default function TrendingCard({postsAreChanged}) {
                 </ul> :
                 <ul>
                     {hashtags.map((el, i) =>
-                        <HashtagItem key={i} data-test="hashtag">
-                            <Link to={`/hashtag/${el.name}`}>#{el.name}</Link>
+                        <HashtagItem key={i}>
+                            <Link data-test="hashtag" to={`/hashtag/${el.name}`}>#{el.name}</Link>
                         </HashtagItem>)}
                 </ul>
             }

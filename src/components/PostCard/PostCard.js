@@ -103,8 +103,8 @@ export default function PostCard({ post, postsAreChanged, setPostsAreChanged, is
                 <img src={photo_author} onClick={goToUserPage} alt="foto-perfil" />
                 <ReactionContainer>
                 {user_liked ? <Heart onClick={handleLike} data-test="like-btn" /> : <HeartTransparent data-test="like-btn" onClick={handleLike} />}
-                <TooltipContainer data-test="tooltip" data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription} >
-                    <p data-test="counter" >{likes_count > 1 ? `${likes_count} likes` : `${likes_count} like`}</p>
+                <TooltipContainer>
+                    <p data-test="counter tooltip"  data-tooltip-id="my-tooltip" data-tooltip-content={likesDescription}>{likes_count > 1 ? `${likes_count} likes` : `${likes_count} like`}</p>
                 </TooltipContainer>
                 <Tooltip
                     id="my-tooltip"

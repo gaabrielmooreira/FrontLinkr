@@ -27,6 +27,7 @@ export const Icon = styled(RiRepeatLine)`
 `;
 
 export const ModalContainer = styled.div`
+    z-index:3;
     display: flex;
     position: fixed;
     width: 100vw;

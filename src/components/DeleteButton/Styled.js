@@ -11,6 +11,7 @@ export const DeleteIcon = styled(AiFillDelete)`
 `
 
 export const ModalContainer = styled.div`
+    z-index:3;
     display: flex;
     position: fixed;
     width: 100vw;
