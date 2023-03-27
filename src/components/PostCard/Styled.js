@@ -19,6 +19,7 @@ export const Post = styled.li`
     padding:20px;
     background-color: ${BLACK};
     position: relative;
+    z-index: 0;
     @media (max-width: 768px) {
     width:100%
  }
