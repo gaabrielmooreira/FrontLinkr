@@ -1,12 +1,15 @@
 ## Linkr 🔗
 
 ## About
-Linkr is a link-sharing social network! Enjoy and share those awesome materials you find about development with very cool hashtags <3
+Linkr is a link-sharing social network! Post that really smart website with usefull tips or just that super funny meme with some hashtags you love <3
 
 </br>
+
 ## Deployment
+
 <a  href="https://linkr-front-beige.vercel.app/">linkr-pi.vercel.app/</a>
 </br>
+
 ## Features ✨
 
 - Authentication
@@ -22,7 +25,7 @@ Linkr is a link-sharing social network! Enjoy and share those awesome materials 
 ## How to run ▶️
 ```bash
 # Clone this repository
-$ git clone <https://github.com/rabbithay/linkr.git>
+$ git clone <https://github.com/gaabrielmooreira/linkr.git>
 # Access the project folder cmd/terminal
 $ cd linkr
 # Install the dependencies
