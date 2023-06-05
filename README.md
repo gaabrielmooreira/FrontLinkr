@@ -1,13 +1,16 @@
 ## Linkr 🔗
 
-## About
-Linkr is a link-sharing social network! Post that really smart website with usefull tips or just that super funny meme with some hashtags you love <3
+## About :memo:
+Linkr is a social network for sharing your best links! Post that really smart website with usefull tips or just that super funny meme with some hashtags you love <3
 
+## Deployment 🚀
+
+<a  href="https://linkr-front-beige.vercel.app/">linkr-front-beige.vercel.app/</a>
 </br>
 
-## Deployment
+## Back end ⚙️
 
-<a  href="https://linkr-front-beige.vercel.app/">linkr-pi.vercel.app/</a>
+<a  href="https://github.com/gaabrielmooreira/linkr-api">github.com/gaabrielmooreira/linkr-api</a>
 </br>
 
 ## Features ✨
@@ -21,6 +24,12 @@ Linkr is a link-sharing social network! Post that really smart website with usef
 - Infinite scroll for posts
 
 </br>
+
+## Stack :toolbox:
+
+![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) 
+![image](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![image](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
 ## How to run ▶️
 ```bash
