@@ -1,12 +1,18 @@
 ## Linkr 🔗
 
-## About
-Linkr is a link-sharing social network! Enjoy and share those awesome materials you find about development with very cool hashtags <3
+## About :memo:
+Linkr is a social network for sharing your best links! Post that really smart website with usefull tips or just that super funny meme with some hashtags you love <3
 
+## Deployment 🚀
+
+<a  href="https://linkr-front-beige.vercel.app/">linkr-front-beige.vercel.app/</a>
 </br>
-## Deployment
-<a  href="https://linkr-front-beige.vercel.app/">linkr-pi.vercel.app/</a>
+
+## Back end ⚙️
+
+<a  href="https://github.com/gaabrielmooreira/linkr-api">github.com/gaabrielmooreira/linkr-api</a>
 </br>
+
 ## Features ✨
 
 - Authentication
@@ -19,10 +25,18 @@ Linkr is a link-sharing social network! Enjoy and share those awesome materials 
 
 </br>
 
+## Stack :toolbox:
+
+<div align="left">
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" Title="React" />
+<img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" alt="React Router" Title="React Router"  />
+<img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" alt="styled-components" Title="styled-components" />
+  </div>
+
 ## How to run ▶️
 ```bash
 # Clone this repository
-$ git clone <https://github.com/rabbithay/linkr.git>
+$ git clone <https://github.com/gaabrielmooreira/linkr.git>
 # Access the project folder cmd/terminal
 $ cd linkr
 # Install the dependencies
