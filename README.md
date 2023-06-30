@@ -1,5 +1,7 @@
-## Linkr 🔗
-
+## Linkr 🔗 
+<p align="center">
+ <img align="center" height="680" src="https://github.com/gaabrielmooreira/linkr/assets/48808807/d25a1101-d544-460c-9d3c-1dcb881a9ce7" />
+</p>
 ## About :memo:
 Linkr is a social network for sharing your best links! Post that really smart website with usefull tips or just that super funny meme with some hashtags you love <3
 
